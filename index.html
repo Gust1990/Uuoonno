@@ -1,0 +1,840 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cónicas FACET Pro</title>
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23e74c3c'/%3E%3Ctext x='50' y='50' font-size='55' text-anchor='middle' dominant-baseline='central'%3E📐%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23e74c3c'/%3E%3Ctext x='50' y='50' font-size='55' text-anchor='middle' dominant-baseline='central'%3E📐%3C/text%3E%3C/svg%3E">
+
+    <style>
+        /* VARIABLES DE TEMA (CLARO/OSCURO) */
+        :root {
+            --bg-body: #f0f2f5;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-muted: #7f8c8d;
+            --border-color: #dcdde1;
+            --primary: #e74c3c;
+            --secondary: #34495e;
+            --accent: #1abc9c;
+            --accent-bg: #e8f8f5;
+            --table-header: #2c3e50;
+            --table-row-even: #f8f9fa;
+            --true-color: #27ae60;
+            --false-color: #c0392b;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #1a1a1a;
+            --bg-card: #2d2d2d;
+            --text-main: #ecf0f1;
+            --text-muted: #bdc3c7;
+            --border-color: #444;
+            --primary: #ff6b6b;
+            --secondary: #ecf0f1;
+            --accent: #1abc9c;
+            --accent-bg: #163d35;
+            --table-header: #000000;
+            --table-row-even: #363636;
+            --true-color: #2ecc71;
+            --false-color: #ff6b6b;
+        }
+
+        /* SETUP GENERAL Y RESPONSIVO */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 13px;
+            line-height: 1.4;
+            color: var(--text-main);
+            background-color: var(--bg-body);
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-top: 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        table {
+            width: 100%;
+            min-width: 650px; 
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+        }
+
+        /* NAVEGACIÓN Y MENÚ */
+        .navbar {
+            background-color: var(--table-header);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: transparent;
+            color: #bdc3c7;
+            border: 2px solid transparent;
+            padding: 8px 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #fff;
+            border-color: var(--primary);
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        /* Botón Modo Oscuro */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 2000;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+        }
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* PROGRESO */
+        .progress-container {
+            background-color: var(--bg-card);
+            padding: 15px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: center;
+            position: sticky;
+            top: 52px;
+            z-index: 999;
+        }
+
+        .progress-bar-bg {
+            background-color: #ddd;
+            height: 14px;
+            border-radius: 7px;
+            width: 90%;
+            margin: 8px auto 0;
+            overflow: hidden;
+            max-width: 600px;
+        }
+
+        .progress-bar-fill {
+            background-color: var(--accent);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* TARJETAS Y CONTENIDO */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px 80px 15px;
+        }
+
+        .section-box {
+            position: relative;
+            background: var(--bg-card);
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .check-wrap {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--accent-bg);
+            padding: 6px 12px;
+            border-radius: 5px;
+            color: var(--accent);
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid var(--accent);
+            user-select: none;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            color: var(--text-main);
+        }
+
+        h2 {
+            font-size: 1.3em;
+            margin-top: 0;
+            color: var(--primary);
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 5px;
+            padding-right: 110px;
+        }
+
+        th {
+            background-color: var(--table-header);
+            color: white;
+            padding: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--table-row-even);
+        }
+
+        .tip-box {
+            background-color: rgba(26, 188, 156, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 8px;
+            margin-top: 5px;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        /* ESTILOS DEL SIMULADOR TEÓRICO */
+        .statement {
+            font-size: 1.15em;
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: rgba(41, 128, 185, 0.05);
+            border-left: 4px solid var(--secondary);
+            border-radius: 4px;
+        }
+
+        .veredicto {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: white;
+        }
+        .veredicto.verdadero { background-color: var(--true-color); }
+        .veredicto.falso { background-color: var(--false-color); }
+
+        .justificacion {
+            font-size: 1.05em;
+            background-color: rgba(0,0,0,0.03);
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid var(--border-color);
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            background-color: rgba(0,0,0,0.08);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        /* ECUACIONES VERTICALES Y FRACCIONES BLINDADAS */
+        .eq {
+            display: inline-flex;
+            align-items: center;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            font-size: 1.1em;
+            vertical-align: middle;
+            margin: 0 2px;
+        }
+        .frac {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+            margin: 0 3px;
+        }
+        .num {
+            border-bottom: 1.5px solid var(--text-main);
+            padding: 0 4px;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            line-height: 1;
+            display: block;
+        }
+        .den {
+            padding: 2px 4px 0 4px;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            line-height: 1;
+            display: block;
+        }
+        .signo { margin: 0 4px; vertical-align: middle; }
+
+        /* Estilos Raíces */
+        .raiz {
+            display: inline-flex;
+            align-items: center;
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+        .raiz::before {
+            content: "\221A";
+            font-size: 1.2em;
+            margin-right: 1px;
+            line-height: 1;
+        }
+        .raiz-content {
+            border-top: 1.5px solid var(--text-main);
+            padding: 2px 3px 0 3px;
+            line-height: 1.1;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.4s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5em; }
+            .check-wrap { position: static; margin-bottom: 10px; display: inline-flex; }
+            h2 { padding-right: 0; }
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+    <button class="theme-toggle" id="themeBtn" title="Cambiar Tema">🌓</button>
+
+    <nav class="navbar">
+        <button class="tab-btn active" onclick="openTab('teoria')">📘 TEORÍA GENERAL</button>
+        <button class="tab-btn" onclick="openTab('practica')">🛠️ TIPS PRÁCTICOS</button>
+        <button class="tab-btn" onclick="openTab('simulador')">📝 SIMULADOR TEÓRICO</button>
+    </nav>
+
+    <div class="progress-container">
+        <strong id="progress-text" style="color: var(--text-main); font-size: 1.1em;">Progreso: 0/30 Temas Dominados</strong>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        
+        <div id="teoria" class="tab-content active">
+            <h1>📚 Teoría de Cónicas (FACET)</h1>
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc1"> ¡Me la sé!</label>
+                <h2>📘 1. Definición y Conceptos Principales</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica</th><th>Definición Geométrica</th><th>Restricción Principal</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td>Puntos a distancia fija (radio) de un punto central.</td><td>El radio debe ser r &gt; 0.</td></tr>
+                        <tr><td><strong>Elipse</strong></td><td>Suma de distancias a dos focos es constante (2a).</td><td>La constante (2a) debe ser mayor que la dist. entre focos (2c).</td></tr>
+                        <tr><td><strong>Hipérbola</strong></td><td>Diferencia absoluta de distancias a focos es constante (2a).</td><td>La distancia entre focos (2c) debe ser mayor que 2a.</td></tr>
+                        <tr><td><strong>Parábola</strong></td><td>Puntos equidistantes a un foco y a una directriz.</td><td>El vértice es el punto más cercano al foco y a la directriz.</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc2"> ¡Me la sé!</label>
+                <h2>📐 2. Ecuaciones Canónicas (Centro Origen)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica</th><th>Ecuación Matemática</th><th>Relación Pitagórica</th><th>Excentricidad (e)</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td><div class="eq">x&sup2; + y&sup2; = r&sup2;</div></td><td>No aplica</td><td>No detallada</td></tr>
+                        <tr><td><strong>Elipse</strong></td><td><div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td><td>a&sup2; = b&sup2; + c&sup2;</td><td>e = c/a (&lt; 1)</td></tr>
+                        <tr><td><strong>Hipérbola</strong></td><td><div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td><td>c&sup2; = a&sup2; + b&sup2;</td><td>e = c/a (&gt; 1)</td></tr>
+                        <tr><td><strong>Parábola</strong></td><td><div class="eq">y&sup2; = 4px</div></td><td>No aplica</td><td>No detallada</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc3"> ¡Me la sé!</label>
+                <h2>🚨 3. Ecuaciones Generales y Existencia</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica</th><th>Ecuación General</th><th>Condición Obligatoria para Existir</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td>x&sup2; + y&sup2; + Lx + My + N = 0</td><td>L&sup2; + M&sup2; - 4N &gt; 0</td></tr>
+                        <tr><td><strong>Elipse</strong></td><td>Ax&sup2; + By&sup2; + Cx + Dy + E = 0</td><td>A &ne; B; mismo signo (A &middot; B &gt; 0)</td></tr>
+                        <tr><td><strong>Hipérbola</strong></td><td>Ax&sup2; + By&sup2; + Cx + Dy + E = 0</td><td>A y B con distinto signo (A &middot; B &lt; 0)</td></tr>
+                        <tr><td><strong>Parábola</strong></td><td>By&sup2; + Cx + Dy + E = 0 o Ax&sup2; + Cx...</td><td>Solo UNA variable está elevada al cuadrado</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc4"> ¡Me la sé!</label>
+                <h2>🔄 4. Simetrías y Dominio/Rango (Origen)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica</th><th>Dominio (x)</th><th>Rango (y)</th><th>Simetrías</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td>[-r, r]</td><td>[-r, r]</td><td>Eje x, eje y, y origen.</td></tr>
+                        <tr><td><strong>Elipse</strong></td><td>[-a, a]</td><td>[-b, b]</td><td>Eje x, eje y, y origen.</td></tr>
+                        <tr><td><strong>Hipérbola (H)</strong></td><td>(-&#8734;, -a] &cup; [a, &#8734;)</td><td>Reales (&#8477;)</td><td>Eje x, eje y, y origen.</td></tr>
+                        <tr><td><strong>Hipérbola (V)</strong></td><td>Reales (&#8477;)</td><td>(-&#8734;, -a] &cup; [a, &#8734;)</td><td>Eje x, eje y, y origen.</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc5"> ¡Me la sé!</label>
+                <h2>🗺️ 5. Ecuaciones con Centro Desplazado (&alpha;, &beta;)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica / Orientación</th><th>Ecuación Canónica con Centro Desplazado</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td><div class="eq">(x - &alpha;)&sup2; + (y - &beta;)&sup2; = r&sup2;</div></td></tr>
+                        <tr><td><strong>Elipse (H)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                        <tr><td><strong>Elipse (V)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                        <tr><td><strong>Hipérbola (H)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                        <tr><td><strong>Hipérbola (V)</strong></td><td><div class="eq"><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc6"> ¡Me la sé!</label>
+                <h2>⚔️ 6. Intersecciones con Ejes Coordenados</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica (Centro Origen)</th><th>Intersección Eje x</th><th>Intersección Eje y</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td>(-r, 0) y (r, 0)</td><td>(0, -r) y (0, r)</td></tr>
+                        <tr><td><strong>Elipse</strong></td><td>(&plusmn;a, 0)</td><td>(0, &plusmn;b)</td></tr>
+                        <tr><td><strong>Hipérbola (Focos en x)</strong></td><td>(&plusmn;a, 0)</td><td>No intersecta al eje y</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc7"> ¡Me la sé!</label>
+                <h2>🧰 7. Check-list de Elementos Geométricos</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Elemento</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Centro</strong></td><td>Sí</td><td>Sí</td><td>Sí</td><td>Coincide con vértice</td></tr>
+                        <tr><td><strong>Focos</strong></td><td>No</td><td>Sí (2)</td><td>Sí (2)</td><td>Sí (1)</td></tr>
+                        <tr><td><strong>Vértices</strong></td><td>No</td><td>Mayores/Menores</td><td>Reales/Imaginarios</td><td>Sí (1)</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc8"> ¡Me la sé!</label>
+                <h2>📏 8. Longitudes de Ejes y Segmentos</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica</th><th>Segmento Principal</th><th>Segmento Secundario</th><th>Distancia Focal</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td>Radio: r</td><td>-</td><td>-</td></tr>
+                        <tr><td><strong>Elipse</strong></td><td>Eje mayor: 2a</td><td>Eje menor: 2b</td><td>Distancia: 2c</td></tr>
+                        <tr><td><strong>Hipérbola</strong></td><td>Eje real: 2a</td><td>Eje imaginario: 2b</td><td>Distancia: 2c</td></tr>
+                        <tr><td><strong>Parábola</strong></td><td>Lado recto: 4p</td><td>-</td><td>-</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc9"> ¡Me la sé!</label>
+                <h2>🛤️ 9. Posiciones Relativas y Rectas Secundarias</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica</th><th>Tipo de Recta</th><th>Propiedad</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td>Tangente</td><td>Corta en 1 pto. Dist. del centro a la recta = radio.</td></tr>
+                        <tr><td><strong>Hipérbola</strong></td><td>Asíntotas</td><td>Rectas a las que se aproxima al infinito (se cruzan en el centro).</td></tr>
+                        <tr><td><strong>Parábola</strong></td><td>Directriz</td><td>Recta fija exterior a la curva utilizada para su definición.</td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="tc10"> ¡Me la sé!</label>
+                <h2>🕵️‍♂️ 10. Identificación Teórica (Ec. General)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Coeficientes Cuadráticos (A y B)</th><th>Cónica Resultante</th><th>Verificación Necesaria</th></tr>
+                        <tr><td><strong>A = B</strong></td><td>Circunferencia</td><td>L&sup2; + M&sup2; - 4N &gt; 0</td></tr>
+                        <tr><td><strong>A y B distinto, mismo signo</strong></td><td>Elipse</td><td>Completar cuadrados (no negativo)</td></tr>
+                        <tr><td><strong>A y B distinto signo</strong></td><td>Hipérbola</td><td>Completar cuadrados para verificar</td></tr>
+                        <tr><td><strong>Falta A o B</strong></td><td>Parábola</td><td>Directo</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="practica" class="tab-content">
+            <h1>🚨 El Machete Táctico: Práctica</h1>
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc1"> ¡Me la sé!</label>
+                <h2>🎯 1. Prueba Visual Inmediata (Ax&sup2; y By&sup2;)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>¿Qué miro?</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Términos cuadráticos</strong></td><td>Idénticos (A=B).</td><td>Distintos, igual signo (+/+ o -/-).</td><td>Distinto signo (+/-).</td><td>Falta uno.</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si falta x&sup2; o y&sup2;, es parábola. ¡No pierdas tiempo operando!</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc2"> ¡Me la sé!</label>
+                <h2>📏 2. ¿Quién es el rey "a"?</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Regla para "a"</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>¿Cómo lo identifico?</strong></td><td>No hay "a" (hay radio).</td><td>Es el denominador MAYOR.</td><td>Es el denominador POSITIVO.</td><td>No hay "a" (hay "p").</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: En elipse buscá el mayor; en hipérbola buscá el signo positivo (sin importar el tamaño).</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc3"> ¡Me la sé!</label>
+                <h2>📐 3. La Batalla de Pitágoras</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Relación</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Fórmula</strong></td><td>-</td><td>a&sup2; = b&sup2; + c&sup2;</td><td>c&sup2; = a&sup2; + b&sup2;</td><td>-</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Elipse suma al revés que la Hipérbola. Si cruzás esto, todo da mal.</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc4"> ¡Me la sé!</label>
+                <h2>🧭 4. Orientación Rápida</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Orientación</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>¿Para dónde abre?</strong></td><td>Simétrica.</td><td>Sigue a la variable de "a&sup2;".</td><td>Abre en el eje de la variable positiva.</td><td>Abre en el eje de la variable lineal.</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Trazá el centro primero para no dibujar las curvas apuntando a cualquier lado.</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc5"> ¡Me la sé!</label>
+                <h2>🔍 5. Signos en la Forma Canónica</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Estructura</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Signos</strong></td><td>Suma = r&sup2; (+)</td><td>Suma de fracciones = 1</td><td>Resta de fracciones = 1</td><td>(Cuadrado) = 4p(Lineal)</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si al completar te queda suma de cuadrados = número negativo, es conjunto vacío.</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc6"> ¡Me la sé!</label>
+                <h2>🛠️ 6. Completando Cuadrados (Peligro)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cuidado</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Paso crítico</strong></td><td>Suma de ambos lados.</td><td>Factor común positivo (+).</td><td>Factor común negativo (-). ¡Cambian signos!</td><td>Se hace para una sola letra.</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: En hipérbola, no cambiar el signo de adentro del paréntesis al sacar factor (-) reprueba al 90%.</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc7"> ¡Me la sé!</label>
+                <h2>💎 7. Exclusividades (Solo tienen UNA)</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Elemento</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Único</strong></td><td>Radio 360&#176;</td><td>e &lt; 1</td><td>Asíntotas</td><td>Directriz</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si el profe menciona "asíntotas" es Hipérbola. Si dice "directriz" es Parábola.</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc8"> ¡Me la sé!</label>
+                <h2>🧮 8. Chequeo Rápido de Focos</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Posición</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Dibujo</strong></td><td>Es el centro.</td><td>Adentro del óvalo (c &lt; a).</td><td>Afuera del vértice (c &gt; a).</td><td>"Abrazado" por la curva (p).</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si graficás la elipse y los focos te caen afuera de la curva... ¡Hiciste mal Pitágoras!</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc9"> ¡Me la sé!</label>
+                <h2>📝 9. Tangentes e Intersecciones</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Sistema</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                        <tr><td><strong>Truco</strong></td><td>Dist(Centro, Recta) = r</td><td>Discriminante = 0</td><td>Paralela a asíntota = Secante (1 pto).</td><td>Paralela al eje = Secante (1 pto).</td></tr>
+                        <tr><td colspan="5"><div class="tip-box">💡 TIP: La fórmula de Distancia a Recta te salva solo en Circunferencia, no la uses en el resto.</div></td></tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="pc10"> ¡Me la sé!</label>
+                <h2>💣 10. Errores Fatales a Evitar</h2>
+                <div class="table-wrapper">
+                    <table>
+                        <tr><th>Cónica</th><th>El error que cuesta el punto</th><th>Cómo evitarlo</th></tr>
+                        <tr><td><strong>Circunferencia</strong></td><td>No probar L&sup2;+M&sup2;-4N &gt; 0.</td><td>Calculalo apenas veas la Ec. General.</td></tr>
+                        <tr><td><strong>Elipse</strong></td><td>Poner "a" siempre con la X.</td><td>"a" es el número más grande.</td></tr>
+                        <tr><td><strong>Hipérbola</strong></td><td>Dibujar entre vértices.</td><td>Entre los vértices hay un vacío.</td></tr>
+                        <tr><td><strong>Parábola</strong></td><td>Confundir Vértice y Foco.</td><td>El Vértice toca la curva, el Foco no.</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="simulador" class="tab-content">
+            <h1>📝 Simulador de Parcial Teórico</h1>
+            <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">Acá no hay botones ocultos. Leé la afirmación, pensá tu respuesta, y validá con la justificación oficial exigida por la FACET.</p>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim1"> ¡Entendido!</label>
+                <h2>Ejercicio 1 (Circunferencia)</h2>
+                <div class="statement">
+                    "Toda ecuación de la forma <code>x&sup2; + y&sup2; + Lx + My + N = 0</code> con L, M, N &#8712; &#8477;, representa geométricamente una circunferencia real en el plano &#8477;&sup2;."
+                </div>
+                <div class="veredicto falso">FALSO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> Para que la ecuación general represente una circunferencia real, el radio debe ser mayor a cero. Según la teoría, el radio se calcula como 
+                    <div class="eq">r = (1/2)<span class="raiz"><span class="raiz-content">L&sup2; + M&sup2; - 4N</span></span></div>. <br><br>
+                    Por lo tanto, es condición excluyente que el discriminante sea positivo: <strong>L&sup2; + M&sup2; - 4N &gt; 0</strong>. <br>
+                    - Si <code>L&sup2; + M&sup2; - 4N = 0</code>, la ecuación representa un único punto.<br>
+                    - Si <code>L&sup2; + M&sup2; - 4N &lt; 0</code>, no hay lugar geométrico.
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim2"> ¡Entendido!</label>
+                <h2>Ejercicio 2 (Elipse)</h2>
+                <div class="statement">
+                    "En una elipse, la relación fundamental pitagórica entre sus semiejes y la semidistancia focal está dada por la ecuación <code>c&sup2; = a&sup2; + b&sup2;</code>."
+                </div>
+                <div class="veredicto falso">FALSO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> La relación planteada corresponde a la hipérbola. En el caso de la elipse, la constante de la suma de las distancias a los focos (2a) debe ser estrictamente mayor que la distancia entre los propios focos (2c). <br><br>
+                    Por lo tanto, la relación fundamental correcta en toda elipse es <strong>a&sup2; = b&sup2; + c&sup2;</strong>. Geométricamente, "a" funciona como la hipotenusa del triángulo rectángulo formado por "b" y "c".
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim3"> ¡Entendido!</label>
+                <h2>Ejercicio 3 (Hipérbola)</h2>
+                <div class="statement">
+                    "Si una recta interseca a una hipérbola en un único punto en el plano, entonces dicha recta es necesariamente tangente a la curva en ese punto."
+                </div>
+                <div class="veredicto falso">FALSO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> La afirmación falla al no considerar el comportamiento de las asíntotas. Es cierto que una recta es tangente si, al plantear el sistema de ecuaciones, el discriminante cuadrático da cero (raíz doble). <br><br>
+                    Sin embargo, cualquier recta que se trace <strong>paralela a una de las asíntotas</strong> cortará a la hipérbola en exactamente <strong>un solo punto</strong>, pero lo hará cortándola (atravesándola), por lo que geométricamente es una recta <strong>secante</strong>, no tangente. Este contraejemplo invalida la proposición.
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim4"> ¡Entendido!</label>
+                <h2>Ejercicio 4 (Parábola)</h2>
+                <div class="statement">
+                    "El vértice de una parábola es el único punto de la cónica cuya distancia al foco es exactamente la mitad de la distancia total entre el foco y la directriz."
+                </div>
+                <div class="veredicto verdadero">VERDADERO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> Por definición, todo punto de la parábola es equidistante del foco y de la directriz. El vértice se encuentra sobre el eje de simetría (la línea más corta perpendicular a la directriz que pasa por el foco).<br><br>
+                    Si llamamos <code>p</code> a la distancia del vértice al foco, la distancia del vértice a la directriz también es <code>p</code>. La distancia total entre el foco y la directriz es <code>2p</code>. Como el vértice está a distancia <code>p</code> del foco, está exactamente a la mitad de esa distancia mínima (<code>p = 2p/2</code>).
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim5"> ¡Entendido!</label>
+                <h2>Ejercicio 5 (Elipse)</h2>
+                <div class="statement">
+                    "La excentricidad de una elipse puede tomar un valor mayor a 1 si su eje focal se encuentra posicionado sobre el eje de ordenadas (eje Y)."
+                </div>
+                <div class="veredicto falso">FALSO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> La excentricidad se define como la razón entre la semidistancia focal y el semieje mayor: <code>e = c / a</code>. <br><br>
+                    En la elipse, por definición geométrica, la suma de las distancias a los focos (2a) es siempre mayor que la distancia entre los focos (2c), lo que implica que <code>a &gt; c</code>. Por lo tanto, el cociente <code>c / a</code> <strong>siempre será estrictamente menor a 1</strong> (e &lt; 1), sin importar si la elipse es horizontal o vertical. Una excentricidad mayor a 1 corresponde exclusivamente a una hipérbola.
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim6"> ¡Entendido!</label>
+                <h2>Ejercicio 6 (Hipérbola)</h2>
+                <div class="statement">
+                    "En una hipérbola equilátera, las asíntotas que delimitan la curva son rectas perpendiculares entre sí."
+                </div>
+                <div class="veredicto verdadero">VERDADERO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> Una hipérbola equilátera se define como el caso especial donde el semieje real y el semieje imaginario son iguales (<code>a = b</code>). <br><br>
+                    Las pendientes de las asíntotas en una hipérbola con centro en el origen son <code>m1 = b/a</code> y <code>m2 = -b/a</code>. Si <code>a = b</code>, entonces las pendientes son <code>m1 = 1</code> y <code>m2 = -1</code>. <br><br>
+                    Al multiplicar sus pendientes (<code>1 * -1 = -1</code>), se cumple la condición analítica de perpendicularidad entre dos rectas. Por ende, las asíntotas forman un ángulo de 90&#176;.
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim7"> ¡Entendido!</label>
+                <h2>Ejercicio 7 (Circunferencia)</h2>
+                <div class="statement">
+                    "El vector que une el centro de una circunferencia con el punto de tangencia de una recta exterior es paralelo a dicha recta."
+                </div>
+                <div class="veredicto falso">FALSO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> Por las propiedades geométricas de la recta tangente a una circunferencia, si tenemos una circunferencia de centro C y una recta R tangente en un punto P, la distancia de C a R es el radio. <br><br>
+                    Además, analíticamente, el vector trazado desde el centro C hasta el punto de tangencia P (el vector CP) es <strong>completamente perpendicular (ortogonal)</strong> a la recta tangente R, no paralelo.
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim8"> ¡Entendido!</label>
+                <h2>Ejercicio 8 (Parábola)</h2>
+                <div class="statement">
+                    "El lado recto de una parábola es un segmento paralelo a su eje de simetría cuya longitud equivale a 4p."
+                </div>
+                <div class="veredicto falso">FALSO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> La proposición tiene una contradicción geométrica. Si bien es correcto que la longitud del lado recto equivale a <code>4p</code>, este segmento <strong>no es paralelo</strong> al eje de simetría. <br><br>
+                    Por definición, el lado recto es una cuerda de la parábola que pasa obligatoriamente por el foco y es <strong>perpendicular</strong> al eje de simetría.
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim9"> ¡Entendido!</label>
+                <h2>Ejercicio 9 (Hipérbola)</h2>
+                <div class="statement">
+                    "El dominio de una hipérbola con ecuación canónica <code>x&sup2;/a&sup2; - y&sup2;/b&sup2; = 1</code> está conformado por todos los números reales."
+                </div>
+                <div class="veredicto falso">FALSO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> En la ecuación de la hipérbola con eje real horizontal (término de x positivo), la curva se compone de dos ramas separadas que se abren hacia la izquierda y la derecha. <br><br>
+                    Si despejamos y, vemos que el radicando impone restricciones. El dominio válido son los intervalos <code>x &#8712; (-&#8734;, -a] &#8746; [a, &#8734;)</code>. Por lo tanto, la hipérbola <strong>no está definida para los valores de x comprendidos estrictamente entre -a y a</strong>. El conjunto de los números reales (<code>&#8477;</code>) es el dominio solo cuando la hipérbola es de eje vertical (término de y positivo).
+                </div>
+            </div>
+
+            <div class="section-box">
+                <label class="check-wrap"><input type="checkbox" class="chk" id="sim10"> ¡Entendido!</label>
+                <h2>Ejercicio 10 (Elipse)</h2>
+                <div class="statement">
+                    "Si al llevar una ecuación general de segundo grado a su forma canónica de elipse se obtiene que los denominadores son iguales (a = b), entonces el lugar geométrico es una circunferencia."
+                </div>
+                <div class="veredicto verdadero">VERDADERO</div>
+                <div class="justificacion">
+                    <strong>Justificación:</strong> La ecuación canónica de la elipse es <div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div> + <div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div> = 1</div>. <br><br>
+                    Si en este caso particular se cumple que <code>a = b</code>, podemos sustituir <code>b</code> por <code>a</code> obteniendo: <div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div> + <div class="frac"><span class="num">y&sup2;</span><span class="den">a&sup2;</span></div> = 1</div>.<br><br>
+                    Multiplicando toda la ecuación por <code>a&sup2;</code> (que es una constante positiva), llegamos a <code>x&sup2; + y&sup2; = a&sup2;</code>. Esta expresión es matemáticamente idéntica a la ecuación canónica de una circunferencia con centro en el origen y radio <code>r = a</code>. En este caso límite, la excentricidad se vuelve 0 y los dos focos colapsan en el centro geométrico.
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // LÓGICA DE TABS
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // TEMA OSCURO
+        const themeBtn = document.getElementById('themeBtn');
+        const body = document.body;
+
+        themeBtn.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('conicas_theme', newTheme);
+        });
+
+        // PROGRESO Y LOCALSTORAGE
+        const checkboxes = document.querySelectorAll('.chk');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const total = checkboxes.length; 
+
+        function updateProgress() {
+            const checked = document.querySelectorAll('.chk:checked').length;
+            const percent = Math.round((checked / total) * 100);
+            
+            progressFill.style.width = percent + '%';
+            progressText.innerText = `Progreso: ${checked}/${total} Temas Dominados (${percent}%)`;
+            
+            if(percent === 100) {
+                progressFill.style.backgroundColor = 'var(--accent)';
+                progressText.innerText = "¡FELICITACIONES! Ya estás listo para el parcial 🚀";
+                progressText.style.color = "var(--accent)";
+            } else {
+                progressFill.style.backgroundColor = 'var(--primary)';
+                progressText.style.color = "var(--text-main)";
+            }
+        }
+
+        checkboxes.forEach(chk => {
+            // Cargar estado inicial
+            const savedState = localStorage.getItem('conicas_' + chk.id);
+            if (savedState === 'true') {
+                chk.checked = true;
+            }
+            
+            // Guardar al hacer clic
+            chk.addEventListener('change', () => {
+                localStorage.setItem('conicas_' + chk.id, chk.checked);
+                updateProgress();
+            });
+        });
+
+        // Al iniciar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('conicas_theme');
+            if (savedTheme) {
+                body.setAttribute('data-theme', savedTheme);
+            }
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
