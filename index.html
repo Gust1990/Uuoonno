@@ -1,358 +1,107 @@
-index.html
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cónicas FACET Pro</title>
+    <title>Álgebra y Geometría - FACET Pro</title>
     
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#2c3e50">
     <meta name="mobile-web-app-capable" content="yes">
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23e74c3c'/%3E%3Ctext x='50' y='50' font-size='55' text-anchor='middle' dominant-baseline='central'%3E📐%3C/text%3E%3C/svg%3E">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23e74c3c'/%3E%3Ctext x='50' y='50' font-size='55' text-anchor='middle' dominant-baseline='central'%3E📐%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232c3e50'/%3E%3Cpath d='M20 30 Q50 20 80 30 L80 80 Q50 70 20 80 Z' fill='%23e74c3c'/%3E%3Cpath d='M50 25 L50 75' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%232c3e50'/%3E%3Cpath d='M20 30 Q50 20 80 30 L80 80 Q50 70 20 80 Z' fill='%23e74c3c'/%3E%3Cpath d='M50 25 L50 75' stroke='white' stroke-width='4'/%3E%3C/svg%3E">
 
     <style>
-        /* VARIABLES DE TEMA (CLARO/OSCURO) */
         :root {
-            --bg-body: #f0f2f5;
-            --bg-card: #ffffff;
-            --text-main: #2c3e50;
-            --text-muted: #7f8c8d;
-            --border-color: #dcdde1;
-            --primary: #e74c3c;
-            --secondary: #34495e;
-            --accent: #1abc9c;
-            --accent-bg: #e8f8f5;
-            --table-header: #2c3e50;
-            --table-row-even: #f8f9fa;
-            --true-color: #27ae60;
-            --false-color: #c0392b;
+            --bg-body: #f0f2f5; --bg-card: #ffffff; --text-main: #2c3e50; 
+            --border-color: #dcdde1; --primary: #e74c3c; --secondary: #34495e; 
+            --accent: #1abc9c; --accent-bg: #e8f8f5; --true-color: #27ae60; --false-color: #c0392b;
         }
-
         [data-theme="dark"] {
-            --bg-body: #1a1a1a;
-            --bg-card: #2d2d2d;
-            --text-main: #ecf0f1;
-            --text-muted: #bdc3c7;
-            --border-color: #444;
-            --primary: #ff6b6b;
-            --secondary: #ecf0f1;
-            --accent: #1abc9c;
-            --accent-bg: #163d35;
-            --table-header: #000000;
-            --table-row-even: #363636;
-            --true-color: #2ecc71;
-            --false-color: #ff6b6b;
+            --bg-body: #1a1a1a; --bg-card: #2d2d2d; --text-main: #ecf0f1; 
+            --border-color: #444; --primary: #ff6b6b; --secondary: #ecf0f1; 
+            --accent: #1abc9c; --accent-bg: #163d35; --true-color: #2ecc71; --false-color: #ff6b6b;
         }
 
-        /* SETUP GENERAL Y RESPONSIVO */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 13px;
-            line-height: 1.4;
-            color: var(--text-main);
-            background-color: var(--bg-body);
-            margin: 0;
-            padding: 0;
-            transition: background 0.3s, color 0.3s;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; font-size: 13px; line-height: 1.4; color: var(--text-main); background-color: var(--bg-body); margin: 0; padding: 0; transition: 0.3s; }
+        
+        /* TABLAS */
+        .table-wrapper { width: 100%; overflow-x: auto; margin-top: 15px; border-radius: 8px; border: 1px solid var(--border-color); }
+        table { width: 100%; min-width: 650px; border-collapse: collapse; background: var(--bg-card); }
+        th { background-color: #2c3e50; color: white; padding: 10px; font-size: 12px; text-transform: uppercase; border: 1px solid var(--border-color); }
+        td { padding: 10px; border: 1px solid var(--border-color); text-align: left; vertical-align: middle;}
+        tr:nth-child(even) { background-color: rgba(0,0,0,0.03); }
 
-        .table-wrapper {
-            width: 100%;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            margin-top: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-        }
+        /* NAVEGACIÓN Y MENÚS */
+        .header-nav { background: #2c3e50; padding: 10px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .unit-selector { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .unit-btn { background: #34495e; color: #bdc3c7; border: 2px solid transparent; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 14px;}
+        .unit-btn.active.u3 { background: #c0392b; color: white; border-color: #e74c3c; }
+        .unit-btn.active.u5 { background: #2980b9; color: white; border-color: #3498db; }
+        
+        .section-selector { display: flex; justify-content: center; gap: 10px; }
+        .sec-btn { background: transparent; color: #bdc3c7; border: none; border-bottom: 3px solid transparent; padding: 5px 15px; font-weight: bold; cursor: pointer; font-size: 13px; }
+        .sec-btn.active { color: white; border-color: var(--accent); }
 
-        table {
-            width: 100%;
-            min-width: 650px; 
-            border-collapse: collapse;
-            background-color: var(--bg-card);
-        }
-
-        /* NAVEGACIÓN Y MENÚ */
-        .navbar {
-            background-color: var(--table-header);
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            background: transparent;
-            color: #bdc3c7;
-            border: 2px solid transparent;
-            padding: 8px 15px;
-            font-weight: bold;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            color: #fff;
-            border-color: var(--primary);
-            background-color: rgba(255,255,255,0.1);
-        }
-
-        /* Botón Modo Oscuro */
-        .theme-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 2000;
-            font-size: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-        }
-        .theme-toggle:hover {
-            transform: scale(1.1);
-        }
-
+        .theme-toggle { position: fixed; bottom: 20px; right: 20px; background: var(--secondary); color: white; border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 2000; font-size: 24px; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        
         /* PROGRESO */
-        .progress-container {
-            background-color: var(--bg-card);
-            padding: 15px;
-            border-bottom: 1px solid var(--border-color);
-            text-align: center;
-            position: sticky;
-            top: 52px;
-            z-index: 999;
-        }
+        .progress-container { background: var(--bg-card); padding: 15px; border-bottom: 1px solid var(--border-color); text-align: center; position: sticky; top: 89px; z-index: 999; }
+        .progress-bar-bg { background: #ddd; height: 14px; border-radius: 7px; width: 90%; margin: 8px auto 0; overflow: hidden; max-width: 600px; }
+        .progress-bar-fill { background: var(--accent); height: 100%; width: 0%; transition: 0.5s ease; }
 
-        .progress-bar-bg {
-            background-color: #ddd;
-            height: 14px;
-            border-radius: 7px;
-            width: 90%;
-            margin: 8px auto 0;
-            overflow: hidden;
-            max-width: 600px;
-        }
+        /* CONTENIDO Y TARJETAS */
+        .container { max-width: 1100px; margin: 20px auto; padding: 0 15px 80px 15px; }
+        .unit-container, .sec-container { display: none; }
+        
+        .section-box { position: relative; background: var(--bg-card); padding: 20px; margin-bottom: 25px; border-radius: 10px; border: 1px solid var(--border-color); box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .check-wrap { position: absolute; top: 15px; right: 15px; display: flex; align-items: center; gap: 5px; background: var(--accent-bg); padding: 6px 12px; border-radius: 5px; color: var(--accent); font-weight: bold; cursor: pointer; border: 1px solid var(--accent); user-select: none;}
+        
+        h1 { text-align: center; font-size: 1.8em; color: var(--text-main); margin-top: 0;}
+        h2 { font-size: 1.3em; margin-top: 0; color: var(--primary); border-bottom: 1px solid var(--primary); padding-bottom: 5px; padding-right: 110px; }
+        
+        .tip-box { background: rgba(26, 188, 156, 0.1); border-left: 4px solid var(--accent); padding: 8px; margin-top: 5px; font-weight: bold; color: var(--accent); }
+        .statement { font-size: 1.15em; font-style: italic; margin-bottom: 15px; padding: 15px; background: rgba(0,0,0,0.03); border-left: 4px solid var(--secondary); border-radius: 4px; }
+        .veredicto { font-size: 1.2em; font-weight: bold; margin-bottom: 8px; display: inline-block; padding: 4px 10px; border-radius: 4px; color: white; }
+        .veredicto.verdadero { background: var(--true-color); } .veredicto.falso { background: var(--false-color); }
+        .justificacion { font-size: 1.05em; background: rgba(0,0,0,0.03); padding: 15px; border-radius: 5px; border: 1px solid var(--border-color); }
+        code { font-family: 'Courier New', monospace; font-weight: bold; background: rgba(0,0,0,0.08); padding: 2px 5px; border-radius: 4px; }
 
-        .progress-bar-fill {
-            background-color: var(--accent);
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        /* TARJETAS Y CONTENIDO */
-        .container {
-            max-width: 1100px;
-            margin: 20px auto;
-            padding: 0 15px 80px 15px;
-        }
-
-        .section-box {
-            position: relative;
-            background: var(--bg-card);
-            padding: 20px;
-            margin-bottom: 25px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        .check-wrap {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            background: var(--accent-bg);
-            padding: 6px 12px;
-            border-radius: 5px;
-            color: var(--accent);
-            font-weight: bold;
-            cursor: pointer;
-            border: 1px solid var(--accent);
-            user-select: none;
-        }
-
-        h1 {
-            text-align: center;
-            font-size: 2em;
-            color: var(--text-main);
-        }
-
-        h2 {
-            font-size: 1.3em;
-            margin-top: 0;
-            color: var(--primary);
-            border-bottom: 1px solid var(--primary);
-            padding-bottom: 5px;
-            padding-right: 110px;
-        }
-
-        th {
-            background-color: var(--table-header);
-            color: white;
-            padding: 10px;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        td {
-            padding: 10px;
-            border: 1px solid var(--border-color);
-        }
-
-        tr:nth-child(even) {
-            background-color: var(--table-row-even);
-        }
-
-        .tip-box {
-            background-color: rgba(26, 188, 156, 0.1);
-            border-left: 4px solid var(--accent);
-            padding: 8px;
-            margin-top: 5px;
-            font-weight: bold;
-            color: var(--accent);
-        }
-
-        /* ESTILOS DEL SIMULADOR TEÓRICO */
-        .statement {
-            font-size: 1.15em;
-            font-style: italic;
-            margin-bottom: 15px;
-            padding: 15px;
-            background-color: rgba(41, 128, 185, 0.05);
-            border-left: 4px solid var(--secondary);
-            border-radius: 4px;
-        }
-
-        .veredicto {
-            font-size: 1.2em;
-            font-weight: bold;
-            margin-bottom: 8px;
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 4px;
-            color: white;
-        }
-        .veredicto.verdadero { background-color: var(--true-color); }
-        .veredicto.falso { background-color: var(--false-color); }
-
-        .justificacion {
-            font-size: 1.05em;
-            background-color: rgba(0,0,0,0.03);
-            padding: 15px;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-        }
-
-        code {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            background-color: rgba(0,0,0,0.08);
-            padding: 2px 5px;
-            border-radius: 4px;
-        }
-
-        /* ECUACIONES VERTICALES Y FRACCIONES BLINDADAS */
-        .eq {
-            display: inline-flex;
-            align-items: center;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-            font-size: 1.1em;
-            vertical-align: middle;
-            margin: 0 2px;
-        }
-        .frac {
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            vertical-align: middle;
-            margin: 0 3px;
-        }
-        .num {
-            border-bottom: 1.5px solid var(--text-main);
-            padding: 0 4px;
-            width: 100%;
-            text-align: center;
-            box-sizing: border-box;
-            line-height: 1;
-            display: block;
-        }
-        .den {
-            padding: 2px 4px 0 4px;
-            width: 100%;
-            text-align: center;
-            box-sizing: border-box;
-            line-height: 1;
-            display: block;
-        }
+        /* ECUACIONES Y FRACCIONES BLINDADAS */
+        .eq { display: inline-flex; align-items: center; font-family: 'Courier New', monospace; font-weight: bold; font-size: 1.1em; vertical-align: middle; margin: 0 2px; flex-wrap: wrap; gap: 4px; }
+        .frac { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; vertical-align: middle; margin: 0 3px; }
+        .num { border-bottom: 1.5px solid var(--text-main); padding: 0 4px; width: 100%; text-align: center; box-sizing: border-box; line-height: 1.1; display: block; }
+        .den { padding: 2px 4px 0 4px; width: 100%; text-align: center; box-sizing: border-box; line-height: 1.1; display: block; }
         .signo { margin: 0 4px; vertical-align: middle; }
+        
+        /* RAÍCES BLINDADAS */
+        .raiz { display: inline-flex; align-items: center; white-space: nowrap; vertical-align: middle; }
+        .raiz::before { content: "\221A"; font-size: 1.2em; margin-right: 1px; line-height: 1; }
+        .raiz-content { border-top: 1.5px solid var(--text-main); padding: 2px 3px 0 3px; line-height: 1.1; }
 
-        /* Estilos Raíces */
-        .raiz {
-            display: inline-flex;
-            align-items: center;
-            white-space: nowrap;
-            vertical-align: middle;
-        }
-        .raiz::before {
-            content: "\221A";
-            font-size: 1.2em;
-            margin-right: 1px;
-            line-height: 1;
-        }
-        .raiz-content {
-            border-top: 1.5px solid var(--text-main);
-            padding: 2px 3px 0 3px;
-            line-height: 1.1;
-        }
-
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.4s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 1.5em; }
-            .check-wrap { position: static; margin-bottom: 10px; display: inline-flex; }
-            h2 { padding-right: 0; }
-        }
+        @media (max-width: 600px) { .check-wrap { position: static; margin-bottom: 10px; display: inline-flex; } h2 { padding-right: 0; } }
     </style>
 </head>
 <body data-theme="light">
 
     <button class="theme-toggle" id="themeBtn" title="Cambiar Tema">🌓</button>
 
-    <nav class="navbar">
-        <button class="tab-btn active" onclick="openTab('teoria')">📘 TEORÍA GENERAL</button>
-        <button class="tab-btn" onclick="openTab('practica')">🛠️ TIPS PRÁCTICOS</button>
-        <button class="tab-btn" onclick="openTab('simulador')">📝 SIMULADOR TEÓRICO</button>
-    </nav>
+    <div class="header-nav">
+        <div class="unit-selector">
+            <button class="unit-btn u3 active" onclick="switchView('u3', null)">🔴 U3: Cónicas</button>
+            <button class="unit-btn u5" onclick="switchView('u5', null)">🔵 U5: Complejos</button>
+        </div>
+        <div class="section-selector">
+            <button class="sec-btn active" onclick="switchView(null, 'teoria')">📘 Teoría General</button>
+            <button class="sec-btn" onclick="switchView(null, 'practica')">🛠️ Tips Prácticos</button>
+            <button class="sec-btn" onclick="switchView(null, 'simulador')">📝 Simulador</button>
+        </div>
+    </div>
 
     <div class="progress-container">
-        <strong id="progress-text" style="color: var(--text-main); font-size: 1.1em;">Progreso: 0/30 Temas Dominados</strong>
+        <strong id="progress-text" style="color: var(--text-main); font-size: 1.1em;">Progreso Total: 0/60 Temas Dominados</strong>
         <div class="progress-bar-bg">
             <div class="progress-bar-fill" id="progress-fill"></div>
         </div>
@@ -360,422 +109,803 @@ index.html
 
     <div class="container">
         
-        <div id="teoria" class="tab-content active">
-            <h1>📚 Teoría de Cónicas (FACET)</h1>
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc1"> ¡Me la sé!</label>
-                <h2>📘 1. Definición y Conceptos Principales</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica</th><th>Definición Geométrica</th><th>Restricción Principal</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td>Puntos a distancia fija (radio) de un punto central.</td><td>El radio debe ser r &gt; 0.</td></tr>
-                        <tr><td><strong>Elipse</strong></td><td>Suma de distancias a dos focos es constante (2a).</td><td>La constante (2a) debe ser mayor que la dist. entre focos (2c).</td></tr>
-                        <tr><td><strong>Hipérbola</strong></td><td>Diferencia absoluta de distancias a focos es constante (2a).</td><td>La distancia entre focos (2c) debe ser mayor que 2a.</td></tr>
-                        <tr><td><strong>Parábola</strong></td><td>Puntos equidistantes a un foco y a una directriz.</td><td>El vértice es el punto más cercano al foco y a la directriz.</td></tr>
-                    </table>
+        <div id="u3_container" class="unit-container" style="display:block;">
+            
+            <div id="u3_teoria" class="sec-container" style="display:block;">
+                <h1>📚 Unidad 3: Cónicas - Teoría</h1>
+                
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t1"> ¡Me la sé!</label>
+                    <h2>📘 1. Definición y Conceptos Principales</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica</th><th>Definición Geométrica</th><th>Restricción Principal</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td>Conjunto de puntos a una distancia fija (radio) de un punto central.</td><td>El radio debe ser r &gt; 0.</td></tr>
+                            <tr><td><strong>Elipse</strong></td><td>Puntos cuya suma de distancias a dos puntos fijos (focos) es constante.</td><td>La constante (2a) debe ser mayor que la distancia entre focos (2c).</td></tr>
+                            <tr><td><strong>Hipérbola</strong></td><td>Puntos cuya diferencia absoluta de distancias a dos focos es constante (2a).</td><td>La distancia entre focos (2c) debe ser mayor que 2a.</td></tr>
+                            <tr><td><strong>Parábola</strong></td><td>Puntos equidistantes a un punto fijo (foco) y a una recta fija (directriz).</td><td>El vértice es el punto más cercano al foco y a la directriz.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t2"> ¡Me la sé!</label>
+                    <h2>📐 2. Ecuaciones Canónicas (Centro Origen)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica</th><th>Ecuación Matemática</th><th>Relación Pitagórica</th><th>Excentricidad (e)</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td><div class="eq">x&sup2; + y&sup2; = r&sup2;</div></td><td>No aplica</td><td>No detallada</td></tr>
+                            <tr><td><strong>Elipse</strong></td><td><div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td><td>a&sup2; = b&sup2; + c&sup2;</td><td>e = c/a (&lt; 1)</td></tr>
+                            <tr><td><strong>Hipérbola</strong></td><td><div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td><td>c&sup2; = a&sup2; + b&sup2;</td><td>e = c/a (&gt; 1)</td></tr>
+                            <tr><td><strong>Parábola</strong></td><td><div class="eq">y&sup2; = 4px</div></td><td>No aplica</td><td>No detallada</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t3"> ¡Me la sé!</label>
+                    <h2>🚨 3. Ecuaciones Generales y Existencia</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica</th><th>Ecuación General</th><th>Condición Obligatoria para Existir</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td>x&sup2; + y&sup2; + Lx + My + N = 0</td><td>L&sup2; + M&sup2; - 4N &gt; 0</td></tr>
+                            <tr><td><strong>Elipse</strong></td><td>Ax&sup2; + By&sup2; + Cx + Dy + E = 0</td><td>A &ne; B; mismo signo (A &middot; B &gt; 0)</td></tr>
+                            <tr><td><strong>Hipérbola</strong></td><td>Ax&sup2; + By&sup2; + Cx + Dy + E = 0</td><td>A y B con distinto signo (A &middot; B &lt; 0)</td></tr>
+                            <tr><td><strong>Parábola</strong></td><td>By&sup2; + Cx + Dy + E = 0 o Ax&sup2; + Cx...</td><td>Solo UNA variable está elevada al cuadrado</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t4"> ¡Me la sé!</label>
+                    <h2>🔄 4. Simetrías y Dominio/Rango (Origen)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica</th><th>Dominio (x)</th><th>Rango (y)</th><th>Simetrías</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td>[-r, r]</td><td>[-r, r]</td><td>Eje x, eje y, y origen.</td></tr>
+                            <tr><td><strong>Elipse</strong></td><td>[-a, a]</td><td>[-b, b]</td><td>Eje x, eje y, y origen.</td></tr>
+                            <tr><td><strong>Hipérbola (H)</strong></td><td>(-&#8734;, -a] &cup; [a, &#8734;)</td><td>Reales (&#8477;)</td><td>Eje x, eje y, y origen.</td></tr>
+                            <tr><td><strong>Hipérbola (V)</strong></td><td>Reales (&#8477;)</td><td>(-&#8734;, -a] &cup; [a, &#8734;)</td><td>Eje x, eje y, y origen.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t5"> ¡Me la sé!</label>
+                    <h2>🗺️ 5. Ecuaciones con Centro Desplazado (&alpha;, &beta;)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica / Orientación</th><th>Ecuación Canónica con Centro Desplazado</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td><div class="eq">(x - &alpha;)&sup2; + (y - &beta;)&sup2; = r&sup2;</div></td></tr>
+                            <tr><td><strong>Elipse (H)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                            <tr><td><strong>Elipse (V)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                            <tr><td><strong>Hipérbola (H)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                            <tr><td><strong>Hipérbola (V)</strong></td><td><div class="eq"><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t6"> ¡Me la sé!</label>
+                    <h2>⚔️ 6. Intersecciones con Ejes Coordenados</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica (Centro Origen)</th><th>Intersección Eje x</th><th>Intersección Eje y</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td>(-r, 0) y (r, 0)</td><td>(0, -r) y (0, r)</td></tr>
+                            <tr><td><strong>Elipse</strong></td><td>(&plusmn;a, 0)</td><td>(0, &plusmn;b)</td></tr>
+                            <tr><td><strong>Hipérbola (Focos en x)</strong></td><td>(&plusmn;a, 0)</td><td>No intersecta al eje y</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t7"> ¡Me la sé!</label>
+                    <h2>🧰 7. Check-list de Elementos Geométricos</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Elemento</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Centro</strong></td><td>Sí</td><td>Sí</td><td>Sí</td><td>Coincide con vértice</td></tr>
+                            <tr><td><strong>Focos</strong></td><td>No</td><td>Sí (2)</td><td>Sí (2)</td><td>Sí (1)</td></tr>
+                            <tr><td><strong>Vértices</strong></td><td>No</td><td>Mayores/Menores</td><td>Reales/Imaginarios</td><td>Sí (1)</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t8"> ¡Me la sé!</label>
+                    <h2>📏 8. Longitudes de Ejes y Segmentos</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica</th><th>Segmento Principal</th><th>Segmento Secundario</th><th>Distancia Focal</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td>Radio: r</td><td>-</td><td>-</td></tr>
+                            <tr><td><strong>Elipse</strong></td><td>Eje mayor: 2a</td><td>Eje menor: 2b</td><td>Distancia: 2c</td></tr>
+                            <tr><td><strong>Hipérbola</strong></td><td>Eje real: 2a</td><td>Eje imaginario: 2b</td><td>Distancia: 2c</td></tr>
+                            <tr><td><strong>Parábola</strong></td><td>Lado recto: 4p</td><td>-</td><td>-</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t9"> ¡Me la sé!</label>
+                    <h2>🛤️ 9. Posiciones Relativas y Rectas Secundarias</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica</th><th>Tipo de Recta</th><th>Propiedad</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td>Tangente</td><td>Corta en 1 pto. Dist. del centro a la recta = radio.</td></tr>
+                            <tr><td><strong>Hipérbola</strong></td><td>Asíntotas</td><td>Rectas a las que se aproxima al infinito (se cruzan en el centro).</td></tr>
+                            <tr><td><strong>Parábola</strong></td><td>Directriz</td><td>Recta fija exterior a la curva utilizada para su definición.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_t10"> ¡Me la sé!</label>
+                    <h2>🕵️‍♂️ 10. Identificación Teórica (Ec. General)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Coeficientes Cuadráticos (A y B)</th><th>Cónica Resultante</th><th>Verificación Necesaria</th></tr>
+                            <tr><td><strong>A = B</strong></td><td>Circunferencia</td><td>L&sup2; + M&sup2; - 4N &gt; 0</td></tr>
+                            <tr><td><strong>A y B distinto, mismo signo</strong></td><td>Elipse</td><td>Completar cuadrados (no negativo)</td></tr>
+                            <tr><td><strong>A y B distinto signo</strong></td><td>Hipérbola</td><td>Completar cuadrados para verificar</td></tr>
+                            <tr><td><strong>Falta A o B</strong></td><td>Parábola</td><td>Directo</td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc2"> ¡Me la sé!</label>
-                <h2>📐 2. Ecuaciones Canónicas (Centro Origen)</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica</th><th>Ecuación Matemática</th><th>Relación Pitagórica</th><th>Excentricidad (e)</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td><div class="eq">x&sup2; + y&sup2; = r&sup2;</div></td><td>No aplica</td><td>No detallada</td></tr>
-                        <tr><td><strong>Elipse</strong></td><td><div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td><td>a&sup2; = b&sup2; + c&sup2;</td><td>e = c/a (&lt; 1)</td></tr>
-                        <tr><td><strong>Hipérbola</strong></td><td><div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td><td>c&sup2; = a&sup2; + b&sup2;</td><td>e = c/a (&gt; 1)</td></tr>
-                        <tr><td><strong>Parábola</strong></td><td><div class="eq">y&sup2; = 4px</div></td><td>No aplica</td><td>No detallada</td></tr>
-                    </table>
+            <div id="u3_practica" class="sec-container" style="display:none;">
+                <h1>🚨 Unidad 3: Cónicas - Práctica</h1>
+                
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p1"> ¡Me la sé!</label>
+                    <h2>🎯 1. Prueba Visual Inmediata (Ax&sup2; y By&sup2;)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>¿Qué miro?</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Términos cuadráticos</strong></td><td>Idénticos (A=B).</td><td>Distintos, igual signo (+/+ o -/-).</td><td>Distinto signo (+/-).</td><td>Falta uno.</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: Si falta x&sup2; o y&sup2;, es parábola. ¡No pierdas tiempo operando!</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p2"> ¡Me la sé!</label>
+                    <h2>📏 2. ¿Quién es el rey "a"?</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Regla para "a"</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>¿Cómo lo identifico?</strong></td><td>No hay "a" (hay radio).</td><td>Es el denominador MAYOR.</td><td>Es el denominador POSITIVO.</td><td>No hay "a" (hay "p").</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: En elipse buscá el mayor; en hipérbola buscá el signo positivo (sin importar el tamaño).</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p3"> ¡Me la sé!</label>
+                    <h2>📐 3. La Batalla de Pitágoras</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Relación</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Fórmula</strong></td><td>-</td><td>a&sup2; = b&sup2; + c&sup2;</td><td>c&sup2; = a&sup2; + b&sup2;</td><td>-</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: Elipse suma al revés que la Hipérbola. Si cruzás esto, todo da mal.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p4"> ¡Me la sé!</label>
+                    <h2>🧭 4. Orientación Rápida</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Orientación</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>¿Para dónde abre?</strong></td><td>Simétrica.</td><td>Sigue a la variable de "a&sup2;".</td><td>Abre en el eje de la variable positiva.</td><td>Abre en el eje de la variable lineal.</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: Trazá el centro primero para no dibujar las curvas apuntando a cualquier lado.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p5"> ¡Me la sé!</label>
+                    <h2>🔍 5. Signos en la Forma Canónica</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Estructura</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Signos</strong></td><td>Suma = r&sup2; (+)</td><td>Suma de fracciones = 1</td><td>Resta de fracciones = 1</td><td>(Cuadrado) = 4p(Lineal)</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: Si al completar te queda suma de cuadrados = número negativo, es conjunto vacío.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p6"> ¡Me la sé!</label>
+                    <h2>🛠️ 6. Completando Cuadrados (Peligro)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cuidado</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Paso crítico</strong></td><td>Suma de ambos lados.</td><td>Factor común positivo (+).</td><td>Factor común negativo (-). ¡Cambian signos!</td><td>Se hace para una sola letra.</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: En hipérbola, no cambiar el signo de adentro del paréntesis al sacar factor (-) reprueba al 90%.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p7"> ¡Me la sé!</label>
+                    <h2>💎 7. Exclusividades (Solo tienen UNA)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Elemento</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Único</strong></td><td>Radio 360&deg;</td><td>e &lt; 1</td><td>Asíntotas</td><td>Directriz</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: Si el profe menciona "asíntotas" es Hipérbola. Si dice "directriz" es Parábola.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p8"> ¡Me la sé!</label>
+                    <h2>🧮 8. Chequeo Rápido de Focos</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Posición</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Dibujo</strong></td><td>Es el centro.</td><td>Adentro del óvalo (c &lt; a).</td><td>Afuera del vértice (c &gt; a).</td><td>"Abrazado" por la curva (p).</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: Si graficás la elipse y los focos te caen afuera de la curva... ¡Hiciste mal Pitágoras!</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p9"> ¡Me la sé!</label>
+                    <h2>📝 9. Tangentes e Intersecciones</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Sistema</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
+                            <tr><td><strong>Truco</strong></td><td>Dist(Centro, Recta) = r</td><td>Discriminante = 0</td><td>Paralela a asíntota = Secante (1 pto).</td><td>Paralela al eje = Secante (1 pto).</td></tr>
+                            <tr><td colspan="5"><div class="tip-box">💡 TIP: La fórmula de Distancia a Recta te salva solo en Circunferencia, no la uses en el resto.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_p10"> ¡Me la sé!</label>
+                    <h2>💣 10. Errores Fatales a Evitar</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cónica</th><th>El error que cuesta el punto</th><th>Cómo evitarlo</th></tr>
+                            <tr><td><strong>Circunferencia</strong></td><td>No probar L&sup2;+M&sup2;-4N &gt; 0.</td><td>Calculalo apenas veas la Ec. General.</td></tr>
+                            <tr><td><strong>Elipse</strong></td><td>Poner "a" siempre con la X.</td><td>"a" es el número más grande.</td></tr>
+                            <tr><td><strong>Hipérbola</strong></td><td>Dibujar entre vértices.</td><td>Entre los vértices hay un vacío.</td></tr>
+                            <tr><td><strong>Parábola</strong></td><td>Confundir Vértice y Foco.</td><td>El Vértice toca la curva, el Foco no.</td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc3"> ¡Me la sé!</label>
-                <h2>🚨 3. Ecuaciones Generales y Existencia</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica</th><th>Ecuación General</th><th>Condición Obligatoria para Existir</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td>x&sup2; + y&sup2; + Lx + My + N = 0</td><td>L&sup2; + M&sup2; - 4N &gt; 0</td></tr>
-                        <tr><td><strong>Elipse</strong></td><td>Ax&sup2; + By&sup2; + Cx + Dy + E = 0</td><td>A &ne; B; mismo signo (A &middot; B &gt; 0)</td></tr>
-                        <tr><td><strong>Hipérbola</strong></td><td>Ax&sup2; + By&sup2; + Cx + Dy + E = 0</td><td>A y B con distinto signo (A &middot; B &lt; 0)</td></tr>
-                        <tr><td><strong>Parábola</strong></td><td>By&sup2; + Cx + Dy + E = 0 o Ax&sup2; + Cx...</td><td>Solo UNA variable está elevada al cuadrado</td></tr>
-                    </table>
-                </div>
-            </div>
+            <div id="u3_simulador" class="sec-container" style="display:none;">
+                <h1>📝 Unidad 3: Simulador Teórico</h1>
+                <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">Acá no hay botones ocultos. Leé la afirmación, pensá tu respuesta, y validá con la justificación oficial exigida por la FACET.</p>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc4"> ¡Me la sé!</label>
-                <h2>🔄 4. Simetrías y Dominio/Rango (Origen)</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica</th><th>Dominio (x)</th><th>Rango (y)</th><th>Simetrías</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td>[-r, r]</td><td>[-r, r]</td><td>Eje x, eje y, y origen.</td></tr>
-                        <tr><td><strong>Elipse</strong></td><td>[-a, a]</td><td>[-b, b]</td><td>Eje x, eje y, y origen.</td></tr>
-                        <tr><td><strong>Hipérbola (H)</strong></td><td>(-&#8734;, -a] &cup; [a, &#8734;)</td><td>Reales (&#8477;)</td><td>Eje x, eje y, y origen.</td></tr>
-                        <tr><td><strong>Hipérbola (V)</strong></td><td>Reales (&#8477;)</td><td>(-&#8734;, -a] &cup; [a, &#8734;)</td><td>Eje x, eje y, y origen.</td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s1"> ¡Entendido!</label>
+                    <h2>Ejercicio 1 (Circunferencia)</h2>
+                    <div class="statement">"Toda ecuación de la forma <code>x&sup2; + y&sup2; + Lx + My + N = 0</code> con L, M, N &#8712; &#8477;, representa geométricamente una circunferencia real en el plano &#8477;&sup2;."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Para que la ecuación general represente una circunferencia real, el radio debe ser mayor a cero. Según la teoría, el radio se calcula como <div class="eq">r = (1/2)<span class="raiz"><span class="raiz-content">L&sup2; + M&sup2; - 4N</span></span></div>. <br><br>
+                        Por lo tanto, es condición excluyente que el discriminante sea positivo: <strong>L&sup2; + M&sup2; - 4N &gt; 0</strong>. <br>
+                        - Si <code>L&sup2; + M&sup2; - 4N = 0</code>, la ecuación representa un único punto.<br>
+                        - Si <code>L&sup2; + M&sup2; - 4N &lt; 0</code>, no hay lugar geométrico.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc5"> ¡Me la sé!</label>
-                <h2>🗺️ 5. Ecuaciones con Centro Desplazado (&alpha;, &beta;)</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica / Orientación</th><th>Ecuación Canónica con Centro Desplazado</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td><div class="eq">(x - &alpha;)&sup2; + (y - &beta;)&sup2; = r&sup2;</div></td></tr>
-                        <tr><td><strong>Elipse (H)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
-                        <tr><td><strong>Elipse (V)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
-                        <tr><td><strong>Hipérbola (H)</strong></td><td><div class="eq"><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
-                        <tr><td><strong>Hipérbola (V)</strong></td><td><div class="eq"><div class="frac"><span class="num">(y - &beta;)&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">-</span><div class="frac"><span class="num">(x - &alpha;)&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div></td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s2"> ¡Entendido!</label>
+                    <h2>Ejercicio 2 (Elipse)</h2>
+                    <div class="statement">"En una elipse, la relación fundamental pitagórica entre sus semiejes y la semidistancia focal está dada por la ecuación <code>c&sup2; = a&sup2; + b&sup2;</code>."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La relación planteada corresponde a la hipérbola. En el caso de la elipse, la constante de la suma de las distancias a los focos (2a) debe ser estrictamente mayor que la distancia entre los propios focos (2c). <br><br>
+                        Por lo tanto, la relación fundamental correcta en toda elipse es <strong>a&sup2; = b&sup2; + c&sup2;</strong>. Geométricamente, "a" funciona como la hipotenusa del triángulo rectángulo formado por "b" y "c".
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc6"> ¡Me la sé!</label>
-                <h2>⚔️ 6. Intersecciones con Ejes Coordenados</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica (Centro Origen)</th><th>Intersección Eje x</th><th>Intersección Eje y</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td>(-r, 0) y (r, 0)</td><td>(0, -r) y (0, r)</td></tr>
-                        <tr><td><strong>Elipse</strong></td><td>(&plusmn;a, 0)</td><td>(0, &plusmn;b)</td></tr>
-                        <tr><td><strong>Hipérbola (Focos en x)</strong></td><td>(&plusmn;a, 0)</td><td>No intersecta al eje y</td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s3"> ¡Entendido!</label>
+                    <h2>Ejercicio 3 (Hipérbola)</h2>
+                    <div class="statement">"Si una recta interseca a una hipérbola en un único punto en el plano, entonces dicha recta es necesariamente tangente a la curva en ese punto."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La afirmación falla al no considerar el comportamiento de las asíntotas. Es cierto que una recta es tangente si, al plantear el sistema de ecuaciones, el discriminante cuadrático da cero (raíz doble). <br><br>
+                        Sin embargo, cualquier recta que se trace <strong>paralela a una de las asíntotas</strong> cortará a la hipérbola en exactamente <strong>un solo punto</strong>, pero lo hará cortándola (atravesándola), por lo que geométricamente es una recta <strong>secante</strong>, no tangente. Este contraejemplo invalida la proposición.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc7"> ¡Me la sé!</label>
-                <h2>🧰 7. Check-list de Elementos Geométricos</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Elemento</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Centro</strong></td><td>Sí</td><td>Sí</td><td>Sí</td><td>Coincide con vértice</td></tr>
-                        <tr><td><strong>Focos</strong></td><td>No</td><td>Sí (2)</td><td>Sí (2)</td><td>Sí (1)</td></tr>
-                        <tr><td><strong>Vértices</strong></td><td>No</td><td>Mayores/Menores</td><td>Reales/Imaginarios</td><td>Sí (1)</td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s4"> ¡Entendido!</label>
+                    <h2>Ejercicio 4 (Parábola)</h2>
+                    <div class="statement">"El vértice de una parábola es el único punto de la cónica cuya distancia al foco es exactamente la mitad de la distancia total entre el foco y la directriz."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Por definición, todo punto de la parábola es equidistante del foco y de la directriz. El vértice se encuentra sobre el eje de simetría (la línea más corta perpendicular a la directriz que pasa por el foco).<br><br>
+                        Si llamamos <code>p</code> a la distancia del vértice al foco, la distancia del vértice a la directriz también es <code>p</code>. La distancia total entre el foco y la directriz es <code>2p</code>. Como el vértice está a distancia <code>p</code> del foco, está exactamente a la mitad de esa distancia mínima (<code>p = 2p/2</code>).
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc8"> ¡Me la sé!</label>
-                <h2>📏 8. Longitudes de Ejes y Segmentos</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica</th><th>Segmento Principal</th><th>Segmento Secundario</th><th>Distancia Focal</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td>Radio: r</td><td>-</td><td>-</td></tr>
-                        <tr><td><strong>Elipse</strong></td><td>Eje mayor: 2a</td><td>Eje menor: 2b</td><td>Distancia: 2c</td></tr>
-                        <tr><td><strong>Hipérbola</strong></td><td>Eje real: 2a</td><td>Eje imaginario: 2b</td><td>Distancia: 2c</td></tr>
-                        <tr><td><strong>Parábola</strong></td><td>Lado recto: 4p</td><td>-</td><td>-</td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s5"> ¡Entendido!</label>
+                    <h2>Ejercicio 5 (Elipse)</h2>
+                    <div class="statement">"La excentricidad de una elipse puede tomar un valor mayor a 1 si su eje focal se encuentra posicionado sobre el eje de ordenadas (eje Y)."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La excentricidad se define como la razón entre la semidistancia focal y el semieje mayor: <code>e = c / a</code>. <br><br>
+                        En la elipse, por definición geométrica, la suma de las distancias a los focos (2a) es siempre mayor que la distancia entre los focos (2c), lo que implica que <code>a &gt; c</code>. Por lo tanto, el cociente <code>c / a</code> <strong>siempre será estrictamente menor a 1</strong> (e &lt; 1), sin importar si la elipse es horizontal o vertical. Una excentricidad mayor a 1 corresponde exclusivamente a una hipérbola.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc9"> ¡Me la sé!</label>
-                <h2>🛤️ 9. Posiciones Relativas y Rectas Secundarias</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica</th><th>Tipo de Recta</th><th>Propiedad</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td>Tangente</td><td>Corta en 1 pto. Dist. del centro a la recta = radio.</td></tr>
-                        <tr><td><strong>Hipérbola</strong></td><td>Asíntotas</td><td>Rectas a las que se aproxima al infinito (se cruzan en el centro).</td></tr>
-                        <tr><td><strong>Parábola</strong></td><td>Directriz</td><td>Recta fija exterior a la curva utilizada para su definición.</td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s6"> ¡Entendido!</label>
+                    <h2>Ejercicio 6 (Hipérbola)</h2>
+                    <div class="statement">"En una hipérbola equilátera, las asíntotas que delimitan la curva son rectas perpendiculares entre sí."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Una hipérbola equilátera se define como el caso especial donde el semieje real y el semieje imaginario son iguales (<code>a = b</code>). <br><br>
+                        Las pendientes de las asíntotas en una hipérbola con centro en el origen son <code>m1 = b/a</code> y <code>m2 = -b/a</code>. Si <code>a = b</code>, entonces las pendientes son <code>m1 = 1</code> y <code>m2 = -1</code>. <br><br>
+                        Al multiplicar sus pendientes (<code>1 * -1 = -1</code>), se cumple la condición analítica de perpendicularidad entre dos rectas. Por ende, las asíntotas forman un ángulo de 90&deg;.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="tc10"> ¡Me la sé!</label>
-                <h2>🕵️‍♂️ 10. Identificación Teórica (Ec. General)</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Coeficientes Cuadráticos (A y B)</th><th>Cónica Resultante</th><th>Verificación Necesaria</th></tr>
-                        <tr><td><strong>A = B</strong></td><td>Circunferencia</td><td>L&sup2; + M&sup2; - 4N &gt; 0</td></tr>
-                        <tr><td><strong>A y B distinto, mismo signo</strong></td><td>Elipse</td><td>Completar cuadrados (no negativo)</td></tr>
-                        <tr><td><strong>A y B distinto signo</strong></td><td>Hipérbola</td><td>Completar cuadrados para verificar</td></tr>
-                        <tr><td><strong>Falta A o B</strong></td><td>Parábola</td><td>Directo</td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s7"> ¡Entendido!</label>
+                    <h2>Ejercicio 7 (Circunferencia)</h2>
+                    <div class="statement">"El vector que une el centro de una circunferencia con el punto de tangencia de una recta exterior es paralelo a dicha recta."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Por las propiedades geométricas de la recta tangente a una circunferencia, si tenemos una circunferencia de centro C y una recta R tangente en un punto P, la distancia de C a R es el radio. <br><br>
+                        Además, analíticamente, el vector trazado desde el centro C hasta el punto de tangencia P (el vector CP) es <strong>completamente perpendicular (ortogonal)</strong> a la recta tangente R, no paralelo.
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s8"> ¡Entendido!</label>
+                    <h2>Ejercicio 8 (Parábola)</h2>
+                    <div class="statement">"El lado recto de una parábola es un segmento paralelo a su eje de simetría cuya longitud equivale a 4p."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La proposición tiene una contradicción geométrica. Si bien es correcto que la longitud del lado recto equivale a <code>4p</code>, este segmento <strong>no es paralelo</strong> al eje de simetría. <br><br>
+                        Por definición, el lado recto es una cuerda de la parábola que pasa obligatoriamente por el foco y es <strong>perpendicular</strong> al eje de simetría.
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s9"> ¡Entendido!</label>
+                    <h2>Ejercicio 9 (Hipérbola)</h2>
+                    <div class="statement">"El dominio de una hipérbola con ecuación canónica <code>x&sup2;/a&sup2; - y&sup2;/b&sup2; = 1</code> está conformado por todos los números reales."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> En la ecuación de la hipérbola con eje real horizontal (término de x positivo), la curva se compone de dos ramas separadas que se abren hacia la izquierda y la derecha. <br><br>
+                        Si despejamos y, vemos que el radicando impone restricciones. El dominio válido son los intervalos <code>x &isin; (-&infin;, -a] &cup; [a, &infin;)</code>. Por lo tanto, la hipérbola <strong>no está definida para los valores de x comprendidos estrictamente entre -a y a</strong>. El conjunto de los números reales (<code>&real;</code>) es el dominio solo cuando la hipérbola es de eje vertical (término de y positivo).
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u3_s10"> ¡Entendido!</label>
+                    <h2>Ejercicio 10 (Elipse)</h2>
+                    <div class="statement">"Si al llevar una ecuación general de segundo grado a su forma canónica de elipse se obtiene que los denominadores son iguales (a = b), entonces el lugar geométrico es una circunferencia."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La ecuación canónica de la elipse es <div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div><span class="signo">= 1</span></div>. <br><br>
+                        Si en este caso particular se cumple que <code>a = b</code>, podemos sustituir <code>b</code> por <code>a</code> obteniendo: <div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">+</span><div class="frac"><span class="num">y&sup2;</span><span class="den">a&sup2;</span></div><span class="signo">= 1</span></div>.<br><br>
+                        Multiplicando toda la ecuación por <code>a&sup2;</code> (que es una constante positiva), llegamos a <code>x&sup2; + y&sup2; = a&sup2;</code>. Esta expresión es matemáticamente idéntica a la ecuación canónica de una circunferencia con centro en el origen y radio <code>r = a</code>. En este caso límite, la excentricidad se vuelve 0 y los dos focos colapsan en el centro geométrico.
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="practica" class="tab-content">
-            <h1>🚨 El Machete Táctico: Práctica</h1>
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc1"> ¡Me la sé!</label>
-                <h2>🎯 1. Prueba Visual Inmediata (Ax&sup2; y By&sup2;)</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>¿Qué miro?</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Términos cuadráticos</strong></td><td>Idénticos (A=B).</td><td>Distintos, igual signo (+/+ o -/-).</td><td>Distinto signo (+/-).</td><td>Falta uno.</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si falta x&sup2; o y&sup2;, es parábola. ¡No pierdas tiempo operando!</div></td></tr>
-                    </table>
+        <div id="u5_container" class="unit-container" style="display:none;">
+            
+            <div id="u5_teoria" class="sec-container" style="display:none;">
+                <h1>📚 Unidad 5: Complejos - Teoría</h1>
+                
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t1"> ¡Me la sé!</label>
+                    <h2>📘 1. El Origen: La Unidad Imaginaria</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Concepto</th><th>Definición Matemática</th><th>¿Para qué sirve?</th></tr>
+                            <tr><td><strong>Unidad Imaginaria (i)</strong></td><td>i = <span class="raiz"><span class="raiz-content">-1</span></span> &rArr; i&sup2; = -1</td><td>Permite resolver raíces cuadradas de números negativos (ej: raíz de -4 = 2i).</td></tr>
+                            <tr><td><strong>Número Complejo (z)</strong></td><td>z = a + bi</td><td>Es un número compuesto por una Parte Real (a) y una Parte Imaginaria (b).</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t2"> ¡Me la sé!</label>
+                    <h2>📐 2. Las Tres Formas de Escribirlo</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Forma</th><th>Expresión Matemática</th><th>Uso principal</th></tr>
+                            <tr><td><strong>Binómica / Cartesiana</strong></td><td>z = a + bi</td><td>Suma, resta y representación gráfica inicial.</td></tr>
+                            <tr><td><strong>Polar / Trigonométrica</strong></td><td>z = &rho; [cos(&theta;) + i&middot;sen(&theta;)]</td><td>Multiplicación, división, potencias y raíces.</td></tr>
+                            <tr><td><strong>Exponencial (Euler)</strong></td><td>z = &rho; &middot; e<sup>i&theta;</sup></td><td>Física, ecuaciones diferenciales y notación compacta.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t3"> ¡Me la sé!</label>
+                    <h2>🚨 3. Módulo (&rho;) y Argumento (&theta;)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Elemento</th><th>Fórmula (desde z = a + bi)</th><th>Significado Gráfico</th></tr>
+                            <tr><td><strong>Módulo (|z| o &rho;)</strong></td><td>|z| = <span class="raiz"><span class="raiz-content">a&sup2; + b&sup2;</span></span></td><td>La distancia desde el origen (0,0) hasta el afijo (a,b). Siempre es positivo.</td></tr>
+                            <tr><td><strong>Argumento (&theta;)</strong></td><td>&theta; = arctg(b/a)</td><td>El ángulo que forma el vector con el semieje real positivo (en radianes o grados).</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t4"> ¡Me la sé!</label>
+                    <h2>🔄 4. El Conjugado y el Opuesto</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Concepto</th><th>Notación</th><th>¿Qué le pasa al número?</th></tr>
+                            <tr><td><strong>Complejo Original</strong></td><td>z = a + bi</td><td>Estado base.</td></tr>
+                            <tr><td><strong>Conjugado</strong></td><td>z&#772; = a - bi</td><td>Se le cambia el signo SOLAMENTE a la parte imaginaria. (Reflejo en el eje real).</td></tr>
+                            <tr><td><strong>Opuesto</strong></td><td>-z = -a - bi</td><td>Se le cambia el signo a TODO (parte real e imaginaria). (Reflejo respecto al origen).</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t5"> ¡Me la sé!</label>
+                    <h2>🗺️ 5. Operaciones en Forma Binómica</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Operación</th><th>Fórmula / Método</th></tr>
+                            <tr><td><strong>Suma / Resta</strong></td><td>(a + bi) &plusmn; (c + di) = (a &plusmn; c) + (b &plusmn; d)i <br><em>Real con Real, Imaginario con Imaginario.</em></td></tr>
+                            <tr><td><strong>Multiplicación</strong></td><td>Propiedad distributiva. Recordar que i&sup2; = -1. <br>(ac - bd) + (ad + bc)i</td></tr>
+                            <tr><td><strong>División</strong></td><td>Se multiplica numerador y denominador por el <strong>conjugado</strong> del denominador.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t6"> ¡Me la sé!</label>
+                    <h2>⚔️ 6. Operaciones en Forma Polar</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Operación</th><th>Regla Mnemotécnica (con z1 = &rho;1<sub>&theta;1</sub> y z2 = &rho;2<sub>&theta;2</sub>)</th></tr>
+                            <tr><td><strong>Multiplicación</strong></td><td>Los módulos se MULTIPLICAN, los ángulos se SUMAN. &rarr; (&rho;1 &middot; &rho;2)<sub>(&theta;1 + &theta;2)</sub></td></tr>
+                            <tr><td><strong>División</strong></td><td>Los módulos se DIVIDEN, los ángulos se RESTAN. &rarr; <div class="eq"><div class="frac"><span class="num">&rho;1</span><span class="den">&rho;2</span></div></div><sub>(&theta;1 - &theta;2)</sub></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t7"> ¡Me la sé!</label>
+                    <h2>🧰 7. Potenciación: Fórmula de De Moivre</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Fórmula (z<sup>n</sup>)</th><th>¿Cómo se aplica?</th></tr>
+                            <tr><td><strong>z<sup>n</sup> = &rho;<sup>n</sup> [cos(n&theta;) + i&middot;sen(n&theta;)]</strong></td><td>1. Se eleva el módulo a la potencia "n".<br>2. Se MULTIPLICA el ángulo original por "n".</td></tr>
+                            <tr><td colspan="2"><div class="tip-box">💡 TIP: Jamás intentes elevar (a + bi) a la 5ta con binomios. Pasalo a polar y usá De Moivre.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t8"> ¡Me la sé!</label>
+                    <h2>📏 8. Radicación: Raíces n-ésimas</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Cálculo de W<sub>k</sub> = <sup>n</sup><span class="raiz"><span class="raiz-content">z</span></span></th><th>Fórmula del Ángulo (&alpha;<sub>k</sub>)</th></tr>
+                            <tr><td>El módulo de TODAS las raíces es el mismo: <strong><sup>n</sup><span class="raiz"><span class="raiz-content">&rho;</span></span></strong></td><td><div class="eq">&alpha;<sub>k</sub> = <div class="frac"><span class="num">&theta; + 360&deg;&middot;k</span><span class="den">n</span></div></div></td></tr>
+                            <tr><td colspan="2">Donde <strong>k</strong> toma valores desde 0 hasta (n-1). Ej: Si es raíz cúbica (n=3), k = 0, 1, 2.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t9"> ¡Me la sé!</label>
+                    <h2>🛤️ 9. Potencias Cíclicas de "i"</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Exponente</th><th>Resultado</th><th>Exponente</th><th>Resultado</th></tr>
+                            <tr><td><strong>i<sup>0</sup></strong></td><td>1</td><td><strong>i<sup>2</sup></strong></td><td>-1</td></tr>
+                            <tr><td><strong>i<sup>1</sup></strong></td><td>i</td><td><strong>i<sup>3</sup></strong></td><td>-i</td></tr>
+                            <tr><td colspan="4">A partir de i<sup>4</sup> = 1, el ciclo se repite infinitamente cada 4 números.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_t10"> ¡Me la sé!</label>
+                    <h2>🕵️‍♂️ 10. Representación Gráfica (Plano de Argand)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Eje Cartesiano</th><th>Equivalente en Complejos</th><th>¿Cómo se dibuja z = a + bi?</th></tr>
+                            <tr><td>Eje X (Abscisas)</td><td><strong>Eje Real (Re)</strong></td><td>Se marca la coordenada "a" en el eje horizontal.</td></tr>
+                            <tr><td>Eje Y (Ordenadas)</td><td><strong>Eje Imaginario (Im)</strong></td><td>Se marca la coordenada "b" en el eje vertical. El punto de cruce es el Afijo (z).</td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc2"> ¡Me la sé!</label>
-                <h2>📏 2. ¿Quién es el rey "a"?</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Regla para "a"</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>¿Cómo lo identifico?</strong></td><td>No hay "a" (hay radio).</td><td>Es el denominador MAYOR.</td><td>Es el denominador POSITIVO.</td><td>No hay "a" (hay "p").</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: En elipse buscá el mayor; en hipérbola buscá el signo positivo (sin importar el tamaño).</div></td></tr>
-                    </table>
+            <div id="u5_practica" class="sec-container" style="display:none;">
+                <h1>🚨 Unidad 5: Complejos - Práctica</h1>
+                
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p1"> ¡Me la sé!</label>
+                    <h2>🎯 1. Identificación "Al Ojo"</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Si el número complejo es...</th><th>Significa que...</th><th>Módulo y Ángulo Directo</th></tr>
+                            <tr><td><strong>Real Puro (Ej: z = 5)</strong></td><td>La parte imaginaria es 0 (b=0).</td><td>Ángulo = 0&deg; (si es +) o 180&deg; (si es -).</td></tr>
+                            <tr><td><strong>Imaginario Puro (Ej: z = 3i)</strong></td><td>La parte real es 0 (a=0).</td><td>Ángulo = 90&deg; (si es +) o 270&deg; (si es -).</td></tr>
+                            <tr><td colspan="3"><div class="tip-box">💡 TIP: Si te dan un número sobre los ejes, no hagas la fórmula de Arctangente, sacá el ángulo mirándolo.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p2"> ¡Me la sé!</label>
+                    <h2>📏 2. El Truco Mágico de la División</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Problema: z1 / z2 en binómica</th><th>Solución paso a paso</th></tr>
+                            <tr><td>Tenemos <div class="eq"><div class="frac"><span class="num">3 + 2i</span><span class="den">1 - 4i</span></div></div></td><td>Multiplicar arriba y abajo por el <strong>CONJUGADO del de abajo</strong> (1 + 4i).</td></tr>
+                            <tr><td colspan="2"><div class="tip-box">💡 TIP: Al multiplicar el denominador por su conjugado (a+bi)(a-bi), siempre queda un número real puro: a&sup2; + b&sup2;. ¡La "i" desaparece de abajo!</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p3"> ¡Me la sé!</label>
+                    <h2>📐 3. La Trampa del Argumento (Cuadrantes)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Signos de (a, b)</th><th>Cuadrante</th><th>Corrección a la Calculadora (&theta;)</th></tr>
+                            <tr><td>a(+), b(+)</td><td>1er Cuadrante</td><td>El que da la calculadora está perfecto.</td></tr>
+                            <tr><td>a(-), b(+) / a(-), b(-)</td><td>2do o 3er Cuad.</td><td><strong>¡Sumarle 180&deg;!</strong> al resultado de la calculadora.</td></tr>
+                            <tr><td>a(+), b(-)</td><td>4to Cuadrante</td><td>Sumarle 360&deg; (si te dio negativo y querés ángulo positivo).</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p4"> ¡Me la sé!</label>
+                    <h2>🧭 4. Estrategia de Formas (¿Cuál uso?)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Operación a realizar</th><th>Mejor forma para trabajar</th></tr>
+                            <tr><td><strong>Suma o Resta</strong></td><td>Obligatoriamente en <strong>Binómica</strong>. (No se puede sumar en polar directo).</td></tr>
+                            <tr><td><strong>Multiplicar, Dividir, Potencia, Raíz</strong></td><td>Pasarlo rápido a <strong>Polar / Exponencial</strong> te salva de horas de álgebra.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p5"> ¡Me la sé!</label>
+                    <h2>🔍 5. Propiedades Clave del Módulo (Trampas Teóricas)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Propiedad</th><th>Formula</th><th>Uso en parciales</th></tr>
+                            <tr><td><strong>Módulo al Cuadrado</strong></td><td>|z|&sup2; = z &middot; z&#772;</td><td>Te lo dan para simplificar ecuaciones raras. z por su conjugado da el módulo al cuadrado.</td></tr>
+                            <tr><td><strong>Desigualdad Triangular</strong></td><td>|z1 + z2| &le; |z1| + |z2|</td><td>Verdadero/Falso clásico. El módulo de una suma NUNCA es la suma de los módulos.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p6"> ¡Me la sé!</label>
+                    <h2>🛠️ 6. Calculando Potencias Gigantes de "i"</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Si te piden: i<sup>2026</sup></th><th>Algoritmo de resolución rápida</th></tr>
+                            <tr><td>Paso 1</td><td>Dividí el exponente (2026) entre 4.</td></tr>
+                            <tr><td>Paso 2</td><td>Agarrá el <strong>RESTO</strong> de esa división (en este caso el resto es 2).</td></tr>
+                            <tr><td>Paso 3</td><td>La respuesta es i<sup>resto</sup>. &rarr; i<sup>2</sup> = -1. ¡Magia!</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p7"> ¡Me la sé!</label>
+                    <h2>💎 7. El Secreto Geométrico de las Raíces</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Si calculás raíces n-ésimas...</th><th>¿Qué figura arman en el gráfico?</th></tr>
+                            <tr><td><strong>Raíz Cuadrada (n=2)</strong></td><td>2 puntos opuestos (alineados con el origen).</td></tr>
+                            <tr><td><strong>Raíz Cúbica (n=3)</strong></td><td>Un triángulo equilátero perfecto.</td></tr>
+                            <tr><td><strong>Raíz n-ésima (general)</strong></td><td>Un polígono regular de "n" lados inscrito en una circunferencia de radio <sup>n</sup><span class="raiz"><span class="raiz-content">&rho;</span></span>.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p8"> ¡Me la sé!</label>
+                    <h2>🧮 8. Ecuaciones Cuadráticas Complejas</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Problema: x&sup2; + x + 1 = 0</th><th>Resolución (Bhaskara)</th></tr>
+                            <tr><td>El discriminante (b&sup2; - 4ac) da negativo.</td><td><span class="raiz"><span class="raiz-content">-3</span></span> se reemplaza inmediatamente por <strong><span class="raiz"><span class="raiz-content">3</span></span> i</strong>.</td></tr>
+                            <tr><td colspan="2"><div class="tip-box">💡 TIP: Las soluciones de una ecuación cuadrática con coeficientes reales SIEMPRE son un par de complejos conjugados.</div></td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p9"> ¡Me la sé!</label>
+                    <h2>📝 9. Igualdad de Complejos</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>Si te dicen que z1 = z2</th><th>Se tiene que cumplir que...</th></tr>
+                            <tr><td><strong>En Binómica</strong></td><td>Real1 = Real2 <strong>Y</strong> Imaginario1 = Imaginario2. (Armás un sistema de 2 ecuaciones).</td></tr>
+                            <tr><td><strong>En Polar</strong></td><td>Módulo1 = Módulo2 <strong>Y</strong> Ángulo1 = Ángulo2 + 360&deg;k.</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_p10"> ¡Me la sé!</label>
+                    <h2>💣 10. Errores Fatales en el Parcial (¡Cuidado!)</h2>
+                    <div class="table-wrapper">
+                        <table>
+                            <tr><th>El error que cuesta el punto</th><th>Cómo evitarlo</th></tr>
+                            <tr><td><strong>Poner la "i" en el Módulo</strong></td><td>Módulo = <span class="raiz"><span class="raiz-content">a&sup2; + b&sup2;</span></span>. ¡La "i" NO SE METE adentro de la raíz!</td></tr>
+                            <tr><td><strong>Calculadora en Radianes/Grados</strong></td><td>Fijate bien qué te pide el profe. Mínimo error de configuración = ejercicio entero mal.</td></tr>
+                            <tr><td><strong>Sumar argumentos en Radianes mal</strong></td><td>Repasá suma de fracciones con &pi;. Ej: &pi;/2 + &pi;/3 = 5&pi;/6.</td></tr>
+                            <tr><td><strong>Olvidar las soluciones en las Raíces</strong></td><td>Una raíz cuarta tiene 4 respuestas (k=0,1,2,3). No te quedes solo con la primera.</td></tr>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc3"> ¡Me la sé!</label>
-                <h2>📐 3. La Batalla de Pitágoras</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Relación</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Fórmula</strong></td><td>-</td><td>a&sup2; = b&sup2; + c&sup2;</td><td>c&sup2; = a&sup2; + b&sup2;</td><td>-</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Elipse suma al revés que la Hipérbola. Si cruzás esto, todo da mal.</div></td></tr>
-                    </table>
-                </div>
-            </div>
+            <div id="u5_simulador" class="sec-container" style="display:none;">
+                <h1>📝 Unidad 5: Simulador Teórico</h1>
+                <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">Acá no hay botones ocultos. Leé la afirmación, pensá tu respuesta, y validá con la justificación oficial exigida por la FACET.</p>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc4"> ¡Me la sé!</label>
-                <h2>🧭 4. Orientación Rápida</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Orientación</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>¿Para dónde abre?</strong></td><td>Simétrica.</td><td>Sigue a la variable de "a&sup2;".</td><td>Abre en el eje de la variable positiva.</td><td>Abre en el eje de la variable lineal.</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Trazá el centro primero para no dibujar las curvas apuntando a cualquier lado.</div></td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s1"> ¡Entendido!</label>
+                    <h2>Ejercicio 1 (Potencias de i)</h2>
+                    <div class="statement">"La suma de cuatro potencias enteras, positivas y consecutivas de la unidad imaginaria 'i' siempre es igual a cero."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La unidad imaginaria tiene un ciclo de repetición cada 4 exponentes: <code>i&sup1; = i</code>, <code>i&sup2; = -1</code>, <code>i&sup3; = -i</code>, <code>i&#8308; = 1</code>. <br><br>
+                        Si tomamos cualquier entero <code>n</code>, la suma de cuatro potencias consecutivas se puede factorizar de la siguiente manera:<br>
+                        <code>i&#x207F; + i&#x207F;&#x207A;&sup1; + i&#x207F;&#x207A;&sup2; + i&#x207F;&#x207A;&sup3; = i&#x207F; (1 + i + i&sup2; + i&sup3;)</code>.<br><br>
+                        Reemplazando los valores cíclicos en el paréntesis obtenemos: <code>i&#x207F; (1 + i - 1 - i) = i&#x207F; (0) = 0</code>. La afirmación es analíticamente correcta para cualquier <code>n</code>.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc5"> ¡Me la sé!</label>
-                <h2>🔍 5. Signos en la Forma Canónica</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Estructura</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Signos</strong></td><td>Suma = r&sup2; (+)</td><td>Suma de fracciones = 1</td><td>Resta de fracciones = 1</td><td>(Cuadrado) = 4p(Lineal)</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si al completar te queda suma de cuadrados = número negativo, es conjunto vacío.</div></td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s2"> ¡Entendido!</label>
+                    <h2>Ejercicio 2 (Módulo y Suma)</h2>
+                    <div class="statement">"El módulo de la suma de dos números complejos <code>z1</code> y <code>z2</code> es siempre igual a la suma de los módulos de cada complejo por separado."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La proposición contradice la <strong>Desigualdad Triangular</strong> de los números complejos, la cual establece formalmente que <code>|z1 + z2| &le; |z1| + |z2|</code>. <br><br>
+                        Geométricamente, la suma de dos complejos representa la diagonal del paralelogramo formado por sus vectores. La longitud de esa diagonal es estrictamente menor a la suma de las longitudes de los dos lados, a menos que los vectores sean colineales y apunten en el mismo sentido (el único caso donde se da la igualdad).
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc6"> ¡Me la sé!</label>
-                <h2>🛠️ 6. Completando Cuadrados (Peligro)</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cuidado</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Paso crítico</strong></td><td>Suma de ambos lados.</td><td>Factor común positivo (+).</td><td>Factor común negativo (-). ¡Cambian signos!</td><td>Se hace para una sola letra.</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: En hipérbola, no cambiar el signo de adentro del paréntesis al sacar factor (-) reprueba al 90%.</div></td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s3"> ¡Entendido!</label>
+                    <h2>Ejercicio 3 (Argumento del Conjugado)</h2>
+                    <div class="statement">"El argumento principal de un número complejo no nulo <code>z</code> es exactamente igual al argumento principal de su complejo conjugado <code>z&#772;</code>."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Geométricamente, el conjugado de un número complejo (<code>a - bi</code>) representa el reflejo especular del número original (<code>a + bi</code>) respecto al eje real (eje X).<br><br>
+                        Por lo tanto, si el complejo <code>z</code> tiene un argumento principal <code>&theta;</code> (medido en sentido antihorario), su conjugado <code>z&#772;</code> se ubicará en el semiplano opuesto, por lo que su ángulo será <code>-&theta;</code>. Expresado como argumento principal (entre 0&deg; y 360&deg;), el argumento del conjugado es <code>360&deg; - &theta;</code>, lo cual es distinto de <code>&theta;</code>.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc7"> ¡Me la sé!</label>
-                <h2>💎 7. Exclusividades (Solo tienen UNA)</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Elemento</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Único</strong></td><td>Radio 360&#176;</td><td>e &lt; 1</td><td>Asíntotas</td><td>Directriz</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si el profe menciona "asíntotas" es Hipérbola. Si dice "directriz" es Parábola.</div></td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s4"> ¡Entendido!</label>
+                    <h2>Ejercicio 4 (Inverso Multiplicativo)</h2>
+                    <div class="statement">"El inverso multiplicativo de un número complejo <code>z = a + bi</code> (con z &ne; 0) es idéntico a su conjugado <code>z&#772; = a - bi</code>."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Por definición, el inverso multiplicativo de <code>z</code> es <code>z&piv;&sup1;</code>, de tal forma que <code>z &middot; z&piv;&sup1; = 1</code>.<br><br>
+                        Si multiplicamos un complejo por su conjugado, obtenemos el cuadrado de su módulo: <code>z &middot; z&#772; = |z|&sup2;</code>. <br>
+                        Para que <code>z&#772;</code> sea el inverso multiplicativo, se requeriría que <code>|z|&sup2; = 1</code>. Por ende, la afirmación solo es verdadera para números complejos de módulo 1. En el caso general, la fórmula correcta del inverso es <div class="eq">z&piv;&sup1; = <div class="frac"><span class="num">z&#772;</span><span class="den">|z|&sup2;</span></div></div>.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc8"> ¡Me la sé!</label>
-                <h2>🧮 8. Chequeo Rápido de Focos</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Posición</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Dibujo</strong></td><td>Es el centro.</td><td>Adentro del óvalo (c &lt; a).</td><td>Afuera del vértice (c &gt; a).</td><td>"Abrazado" por la curva (p).</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: Si graficás la elipse y los focos te caen afuera de la curva... ¡Hiciste mal Pitágoras!</div></td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s5"> ¡Entendido!</label>
+                    <h2>Ejercicio 5 (Rotación Geométrica)</h2>
+                    <div class="statement">"Multiplicar un número complejo cualquiera por la unidad imaginaria 'i' equivale geométricamente a rotar su vector representativo 90 grados en sentido antihorario."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Analíticamente, la unidad imaginaria <code>i</code> en forma polar se escribe como <code>1 (cos 90&deg; + i&middot;sen 90&deg;)</code>, es decir, tiene módulo 1 y argumento 90&deg;.<br><br>
+                        Por las reglas de la multiplicación de complejos en forma polar, al multiplicar cualquier complejo <code>z</code> (de módulo &rho; y argumento &theta;) por <code>i</code>, se multiplican los módulos (<code>&rho; &middot; 1 = &rho;</code>) y se suman los argumentos (<code>&theta; + 90&deg;</code>). Geométricamente, el vector conserva su longitud pero gira exactamente 90&deg; en el plano de Argand.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc9"> ¡Me la sé!</label>
-                <h2>📝 9. Tangentes e Intersecciones</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Sistema</th><th>Circunferencia</th><th>Elipse</th><th>Hipérbola</th><th>Parábola</th></tr>
-                        <tr><td><strong>Truco</strong></td><td>Dist(Centro, Recta) = r</td><td>Discriminante = 0</td><td>Paralela a asíntota = Secante (1 pto).</td><td>Paralela al eje = Secante (1 pto).</td></tr>
-                        <tr><td colspan="5"><div class="tip-box">💡 TIP: La fórmula de Distancia a Recta te salva solo en Circunferencia, no la uses en el resto.</div></td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s6"> ¡Entendido!</label>
+                    <h2>Ejercicio 6 (Ordenamiento en C)</h2>
+                    <div class="statement">"Dados dos números complejos distintos <code>z1</code> y <code>z2</code>, siempre es posible determinar cuál es mayor evaluando una relación de orden estricto, tal como se hace en los números reales."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> El conjunto de los números complejos (<code>&#8450;</code>) <strong>no es un cuerpo ordenado</strong>. Es matemáticamente imposible definir una relación de orden total (mayor que o menor que) en los complejos que sea compatible con las operaciones de suma y producto definidas en el mismo campo.<br><br>
+                        Solo se pueden establecer relaciones de orden comparando sus <strong>módulos</strong> (ya que <code>|z|</code> es un número real), pero no se puede decir que <code>z1 &gt; z2</code> como entidades complejas.
+                    </div>
                 </div>
-            </div>
 
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="pc10"> ¡Me la sé!</label>
-                <h2>💣 10. Errores Fatales a Evitar</h2>
-                <div class="table-wrapper">
-                    <table>
-                        <tr><th>Cónica</th><th>El error que cuesta el punto</th><th>Cómo evitarlo</th></tr>
-                        <tr><td><strong>Circunferencia</strong></td><td>No probar L&sup2;+M&sup2;-4N &gt; 0.</td><td>Calculalo apenas veas la Ec. General.</td></tr>
-                        <tr><td><strong>Elipse</strong></td><td>Poner "a" siempre con la X.</td><td>"a" es el número más grande.</td></tr>
-                        <tr><td><strong>Hipérbola</strong></td><td>Dibujar entre vértices.</td><td>Entre los vértices hay un vacío.</td></tr>
-                        <tr><td><strong>Parábola</strong></td><td>Confundir Vértice y Foco.</td><td>El Vértice toca la curva, el Foco no.</td></tr>
-                    </table>
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s7"> ¡Entendido!</label>
+                    <h2>Ejercicio 7 (Raíces Polinómicas)</h2>
+                    <div class="statement">"Toda ecuación polinómica de grado 'n' con coeficientes reales tiene exactamente 'n' raíces complejas (contando sus multiplicidades), y las raíces no reales siempre aparecen en pares conjugados."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La primera parte del enunciado es la aplicación directa del <strong>Teorema Fundamental del Álgebra</strong>, que asegura que todo polinomio de grado <code>n</code> tiene exactamente <code>n</code> raíces en <code>&#8450;</code>.<br><br>
+                        La segunda parte corresponde al Teorema de las raíces complejas conjugadas: dado que los coeficientes del polinomio son números reales, si evaluamos la ecuación en una raíz compleja <code>z</code> y nos da 0, al aplicar las propiedades del conjugado a toda la ecuación demostramos que <code>z&#772;</code> también debe anular el polinomio. Por ende, siempre vienen de a dos.
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s8"> ¡Entendido!</label>
+                    <h2>Ejercicio 8 (Suma de Raíces n-ésimas)</h2>
+                    <div class="statement">"Al calcular las 'n' raíces n-ésimas de un número complejo cualquiera, la suma algebraica de todas esas raíces resultantes siempre es igual a cero."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> Geométricamente, las <code>n</code> raíces de un número complejo forman los vértices de un polígono regular de <code>n</code> lados, centrado perfectamente en el origen de coordenadas (0,0) del plano complejo.<br><br>
+                        Al realizar la suma algebraica de todos estos vectores, por simetría rotacional, el vector resultante se anula, ya que el centroide (baricentro) del polígono regular se encuentra en el origen. Por ende, la suma de las raíces es <code>0 + 0i</code>.
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s9"> ¡Entendido!</label>
+                    <h2>Ejercicio 9 (Igualdad en Polar)</h2>
+                    <div class="statement">"Dos números complejos expresados en su forma polar son iguales si y solo si sus módulos son estrictamente iguales y sus argumentos son estrictamente idénticos."</div>
+                    <div class="veredicto falso">FALSO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La condición sobre los módulos es correcta (<code>&rho;1 = &rho;2</code>), pero la restricción sobre los argumentos está incompleta. <br><br>
+                        Debido a la periodicidad de las funciones trigonométricas en la forma polar, los ángulos no necesitan ser "estrictamente idénticos" para representar el mismo vector. Dos complejos son iguales si sus módulos son iguales y sus argumentos difieren en un múltiplo entero de una vuelta completa: <code>&theta;1 = &theta;2 + 360&deg;&middot;k</code> (con <code>k &isin; &Zopf;</code>).
+                    </div>
+                </div>
+
+                <div class="section-box">
+                    <label class="check-wrap"><input type="checkbox" class="chk" id="u5_s10"> ¡Entendido!</label>
+                    <h2>Ejercicio 10 (Fórmula de Euler)</h2>
+                    <div class="statement">"La expresión <code>e<sup>i&pi;</sup> + 1 = 0</code> es matemáticamente correcta y vincula cinco de las constantes más importantes de la matemática."</div>
+                    <div class="veredicto verdadero">VERDADERO</div>
+                    <div class="justificacion">
+                        <strong>Justificación:</strong> La proposición se basa en la forma exponencial (Fórmula de Euler) de los números complejos: <code>e<sup>ix</sup> = cos(x) + i&middot;sen(x)</code>.<br><br>
+                        Si evaluamos la función para un ángulo <code>x = &pi;</code> radianes (180&deg;), obtenemos: <code>e<sup>i&pi;</sup> = cos(&pi;) + i&middot;sen(&pi;)</code>.<br>
+                        Sabiendo que <code>cos(&pi;) = -1</code> y <code>sen(&pi;) = 0</code>, la ecuación se reduce a <code>e<sup>i&pi;</sup> = -1</code>. Al sumar 1 de ambos lados, se llega a la famosa Identidad de Euler: <code>e<sup>i&pi;</sup> + 1 = 0</code>.
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="simulador" class="tab-content">
-            <h1>📝 Simulador de Parcial Teórico</h1>
-            <p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">Acá no hay botones ocultos. Leé la afirmación, pensá tu respuesta, y validá con la justificación oficial exigida por la FACET.</p>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim1"> ¡Entendido!</label>
-                <h2>Ejercicio 1 (Circunferencia)</h2>
-                <div class="statement">
-                    "Toda ecuación de la forma <code>x&sup2; + y&sup2; + Lx + My + N = 0</code> con L, M, N &#8712; &#8477;, representa geométricamente una circunferencia real en el plano &#8477;&sup2;."
-                </div>
-                <div class="veredicto falso">FALSO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> Para que la ecuación general represente una circunferencia real, el radio debe ser mayor a cero. Según la teoría, el radio se calcula como 
-                    <div class="eq">r = (1/2)<span class="raiz"><span class="raiz-content">L&sup2; + M&sup2; - 4N</span></span></div>. <br><br>
-                    Por lo tanto, es condición excluyente que el discriminante sea positivo: <strong>L&sup2; + M&sup2; - 4N &gt; 0</strong>. <br>
-                    - Si <code>L&sup2; + M&sup2; - 4N = 0</code>, la ecuación representa un único punto.<br>
-                    - Si <code>L&sup2; + M&sup2; - 4N &lt; 0</code>, no hay lugar geométrico.
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim2"> ¡Entendido!</label>
-                <h2>Ejercicio 2 (Elipse)</h2>
-                <div class="statement">
-                    "En una elipse, la relación fundamental pitagórica entre sus semiejes y la semidistancia focal está dada por la ecuación <code>c&sup2; = a&sup2; + b&sup2;</code>."
-                </div>
-                <div class="veredicto falso">FALSO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> La relación planteada corresponde a la hipérbola. En el caso de la elipse, la constante de la suma de las distancias a los focos (2a) debe ser estrictamente mayor que la distancia entre los propios focos (2c). <br><br>
-                    Por lo tanto, la relación fundamental correcta en toda elipse es <strong>a&sup2; = b&sup2; + c&sup2;</strong>. Geométricamente, "a" funciona como la hipotenusa del triángulo rectángulo formado por "b" y "c".
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim3"> ¡Entendido!</label>
-                <h2>Ejercicio 3 (Hipérbola)</h2>
-                <div class="statement">
-                    "Si una recta interseca a una hipérbola en un único punto en el plano, entonces dicha recta es necesariamente tangente a la curva en ese punto."
-                </div>
-                <div class="veredicto falso">FALSO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> La afirmación falla al no considerar el comportamiento de las asíntotas. Es cierto que una recta es tangente si, al plantear el sistema de ecuaciones, el discriminante cuadrático da cero (raíz doble). <br><br>
-                    Sin embargo, cualquier recta que se trace <strong>paralela a una de las asíntotas</strong> cortará a la hipérbola en exactamente <strong>un solo punto</strong>, pero lo hará cortándola (atravesándola), por lo que geométricamente es una recta <strong>secante</strong>, no tangente. Este contraejemplo invalida la proposición.
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim4"> ¡Entendido!</label>
-                <h2>Ejercicio 4 (Parábola)</h2>
-                <div class="statement">
-                    "El vértice de una parábola es el único punto de la cónica cuya distancia al foco es exactamente la mitad de la distancia total entre el foco y la directriz."
-                </div>
-                <div class="veredicto verdadero">VERDADERO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> Por definición, todo punto de la parábola es equidistante del foco y de la directriz. El vértice se encuentra sobre el eje de simetría (la línea más corta perpendicular a la directriz que pasa por el foco).<br><br>
-                    Si llamamos <code>p</code> a la distancia del vértice al foco, la distancia del vértice a la directriz también es <code>p</code>. La distancia total entre el foco y la directriz es <code>2p</code>. Como el vértice está a distancia <code>p</code> del foco, está exactamente a la mitad de esa distancia mínima (<code>p = 2p/2</code>).
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim5"> ¡Entendido!</label>
-                <h2>Ejercicio 5 (Elipse)</h2>
-                <div class="statement">
-                    "La excentricidad de una elipse puede tomar un valor mayor a 1 si su eje focal se encuentra posicionado sobre el eje de ordenadas (eje Y)."
-                </div>
-                <div class="veredicto falso">FALSO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> La excentricidad se define como la razón entre la semidistancia focal y el semieje mayor: <code>e = c / a</code>. <br><br>
-                    En la elipse, por definición geométrica, la suma de las distancias a los focos (2a) es siempre mayor que la distancia entre los focos (2c), lo que implica que <code>a &gt; c</code>. Por lo tanto, el cociente <code>c / a</code> <strong>siempre será estrictamente menor a 1</strong> (e &lt; 1), sin importar si la elipse es horizontal o vertical. Una excentricidad mayor a 1 corresponde exclusivamente a una hipérbola.
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim6"> ¡Entendido!</label>
-                <h2>Ejercicio 6 (Hipérbola)</h2>
-                <div class="statement">
-                    "En una hipérbola equilátera, las asíntotas que delimitan la curva son rectas perpendiculares entre sí."
-                </div>
-                <div class="veredicto verdadero">VERDADERO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> Una hipérbola equilátera se define como el caso especial donde el semieje real y el semieje imaginario son iguales (<code>a = b</code>). <br><br>
-                    Las pendientes de las asíntotas en una hipérbola con centro en el origen son <code>m1 = b/a</code> y <code>m2 = -b/a</code>. Si <code>a = b</code>, entonces las pendientes son <code>m1 = 1</code> y <code>m2 = -1</code>. <br><br>
-                    Al multiplicar sus pendientes (<code>1 * -1 = -1</code>), se cumple la condición analítica de perpendicularidad entre dos rectas. Por ende, las asíntotas forman un ángulo de 90&#176;.
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim7"> ¡Entendido!</label>
-                <h2>Ejercicio 7 (Circunferencia)</h2>
-                <div class="statement">
-                    "El vector que une el centro de una circunferencia con el punto de tangencia de una recta exterior es paralelo a dicha recta."
-                </div>
-                <div class="veredicto falso">FALSO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> Por las propiedades geométricas de la recta tangente a una circunferencia, si tenemos una circunferencia de centro C y una recta R tangente en un punto P, la distancia de C a R es el radio. <br><br>
-                    Además, analíticamente, el vector trazado desde el centro C hasta el punto de tangencia P (el vector CP) es <strong>completamente perpendicular (ortogonal)</strong> a la recta tangente R, no paralelo.
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim8"> ¡Entendido!</label>
-                <h2>Ejercicio 8 (Parábola)</h2>
-                <div class="statement">
-                    "El lado recto de una parábola es un segmento paralelo a su eje de simetría cuya longitud equivale a 4p."
-                </div>
-                <div class="veredicto falso">FALSO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> La proposición tiene una contradicción geométrica. Si bien es correcto que la longitud del lado recto equivale a <code>4p</code>, este segmento <strong>no es paralelo</strong> al eje de simetría. <br><br>
-                    Por definición, el lado recto es una cuerda de la parábola que pasa obligatoriamente por el foco y es <strong>perpendicular</strong> al eje de simetría.
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim9"> ¡Entendido!</label>
-                <h2>Ejercicio 9 (Hipérbola)</h2>
-                <div class="statement">
-                    "El dominio de una hipérbola con ecuación canónica <code>x&sup2;/a&sup2; - y&sup2;/b&sup2; = 1</code> está conformado por todos los números reales."
-                </div>
-                <div class="veredicto falso">FALSO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> En la ecuación de la hipérbola con eje real horizontal (término de x positivo), la curva se compone de dos ramas separadas que se abren hacia la izquierda y la derecha. <br><br>
-                    Si despejamos y, vemos que el radicando impone restricciones. El dominio válido son los intervalos <code>x &#8712; (-&#8734;, -a] &#8746; [a, &#8734;)</code>. Por lo tanto, la hipérbola <strong>no está definida para los valores de x comprendidos estrictamente entre -a y a</strong>. El conjunto de los números reales (<code>&#8477;</code>) es el dominio solo cuando la hipérbola es de eje vertical (término de y positivo).
-                </div>
-            </div>
-
-            <div class="section-box">
-                <label class="check-wrap"><input type="checkbox" class="chk" id="sim10"> ¡Entendido!</label>
-                <h2>Ejercicio 10 (Elipse)</h2>
-                <div class="statement">
-                    "Si al llevar una ecuación general de segundo grado a su forma canónica de elipse se obtiene que los denominadores son iguales (a = b), entonces el lugar geométrico es una circunferencia."
-                </div>
-                <div class="veredicto verdadero">VERDADERO</div>
-                <div class="justificacion">
-                    <strong>Justificación:</strong> La ecuación canónica de la elipse es <div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div> + <div class="frac"><span class="num">y&sup2;</span><span class="den">b&sup2;</span></div> = 1</div>. <br><br>
-                    Si en este caso particular se cumple que <code>a = b</code>, podemos sustituir <code>b</code> por <code>a</code> obteniendo: <div class="eq"><div class="frac"><span class="num">x&sup2;</span><span class="den">a&sup2;</span></div> + <div class="frac"><span class="num">y&sup2;</span><span class="den">a&sup2;</span></div> = 1</div>.<br><br>
-                    Multiplicando toda la ecuación por <code>a&sup2;</code> (que es una constante positiva), llegamos a <code>x&sup2; + y&sup2; = a&sup2;</code>. Esta expresión es matemáticamente idéntica a la ecuación canónica de una circunferencia con centro en el origen y radio <code>r = a</code>. En este caso límite, la excentricidad se vuelve 0 y los dos focos colapsan en el centro geométrico.
-                </div>
-            </div>
-
-        </div>
     </div>
 
     <script>
-        // LÓGICA DE TABS
-        function openTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+        let currentUnit = 'u3';
+        let currentSec = 'teoria';
+
+        // GESTIÓN DEL MENÚ STRICT DISPLAY:NONE/BLOCK (No falla nunca)
+        function switchView(newUnit, newSec) {
+            if (newUnit) currentUnit = newUnit;
+            if (newSec) currentSec = newSec;
+
+            // 1. Ocultar todos los contenedores de Unidades y Secciones
+            document.querySelectorAll('.unit-container').forEach(e => e.style.display = 'none');
+            document.querySelectorAll('.sec-container').forEach(e => e.style.display = 'none');
+
+            // 2. Apagar los botones del menú
+            document.querySelectorAll('.unit-btn').forEach(e => e.classList.remove('active'));
+            document.querySelectorAll('.sec-btn').forEach(e => e.classList.remove('active'));
+
+            // 3. Activar los botones seleccionados
+            document.querySelector('.unit-btn.' + currentUnit).classList.add('active');
+            document.querySelector('.sec-btn[onclick*="' + currentSec + '"]').classList.add('active');
+
+            // 4. Mostrar el contenedor de la Unidad y la Sección correspondiente
+            document.getElementById(currentUnit + '_container').style.display = 'block';
+            document.getElementById(currentUnit + '_' + currentSec).style.display = 'block';
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -787,10 +917,10 @@ index.html
             const currentTheme = body.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('conicas_theme', newTheme);
+            localStorage.setItem('facet_mega_theme', newTheme);
         });
 
-        // PROGRESO Y LOCALSTORAGE
+        // PROGRESO GLOBAL (60 Checkboxes)
         const checkboxes = document.querySelectorAll('.chk');
         const progressFill = document.getElementById('progress-fill');
         const progressText = document.getElementById('progress-text');
@@ -801,11 +931,10 @@ index.html
             const percent = Math.round((checked / total) * 100);
             
             progressFill.style.width = percent + '%';
-            progressText.innerText = `Progreso: ${checked}/${total} Temas Dominados (${percent}%)`;
+            progressText.innerText = `Progreso Total: ${checked}/${total} Temas (${percent}%)`;
             
             if(percent === 100) {
                 progressFill.style.backgroundColor = 'var(--accent)';
-                progressText.innerText = "¡FELICITACIONES! Ya estás listo para el parcial 🚀";
                 progressText.style.color = "var(--accent)";
             } else {
                 progressFill.style.backgroundColor = 'var(--primary)';
@@ -814,26 +943,26 @@ index.html
         }
 
         checkboxes.forEach(chk => {
-            // Cargar estado inicial
-            const savedState = localStorage.getItem('conicas_' + chk.id);
+            const savedState = localStorage.getItem('facet_mega_' + chk.id);
             if (savedState === 'true') {
                 chk.checked = true;
             }
             
-            // Guardar al hacer clic
             chk.addEventListener('change', () => {
-                localStorage.setItem('conicas_' + chk.id, chk.checked);
+                localStorage.setItem('facet_mega_' + chk.id, chk.checked);
                 updateProgress();
             });
         });
 
         // Al iniciar la página
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('conicas_theme');
+            const savedTheme = localStorage.getItem('facet_mega_theme');
             if (savedTheme) {
                 body.setAttribute('data-theme', savedTheme);
             }
             updateProgress();
+            // Asegura que al cargar se muestre U3 -> Teoría
+            switchView('u3', 'teoria');
         });
     </script>
 </body>
